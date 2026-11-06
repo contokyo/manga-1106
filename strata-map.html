@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>地層／STRATA 概念地図</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ECEAE4; --paper:#F6F4EE; --ink:#17191B; --ink2:#4F5256; --ink3:#878A8C; --rule:#CFCBC2;
+  --l0:#E3E1DA; --l1:#D9CDB6; --l2:#C9B493; --l3:#A98E6B; --l4:#6E5A45;
+  --t0:#17191B; --t1:#2B2419; --t2:#2B2419; --t3:#F3EBDD; --t4:#F3EBDD;
+  --o:#B5121B; --r:#1F5F8B; --th:#5B5B62; --l:#2E7D5B; --c:#8A6D2E;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#1A1B1D; --paper:#232527; --ink:#E7E4DC; --ink2:#B3B0A8; --ink3:#7F827F; --rule:#3B3E41;
+  --l0:#2A2C2F; --l1:#3A3327; --l2:#4A3E2C; --l3:#5C4A33; --l4:#3C2F22;
+  --t0:#E7E4DC; --t1:#EFE6D3; --t2:#EFE6D3; --t3:#F3EBDD; --t4:#F3EBDD;
+  --o:#EB4A52; --r:#7FB3DA; --th:#B6B6BE; --l:#7CC9A3; --c:#D6B36A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#1A1B1D; --paper:#232527; --ink:#E7E4DC; --ink2:#B3B0A8; --ink3:#7F827F; --rule:#3B3E41;
+  --l0:#2A2C2F; --l1:#3A3327; --l2:#4A3E2C; --l3:#5C4A33; --l4:#3C2F22;
+  --t0:#E7E4DC; --t1:#EFE6D3; --t2:#EFE6D3; --t3:#F3EBDD; --t4:#F3EBDD;
+  --o:#EB4A52; --r:#7FB3DA; --th:#B6B6BE; --l:#7CC9A3; --c:#D6B36A; color-scheme:dark;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 0 90px}
+header{padding:54px 20px 22px}
+h1,h2,h3{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:700;margin:0}
+.kicker{font-family:"Shippori Mincho B1",serif;font-size:13px;letter-spacing:.14em;color:var(--ink3);margin-bottom:8px}
+h1{font-size:30px;line-height:1.3}
+h1 small{display:block;font-size:14px;font-weight:500;letter-spacing:.16em;color:var(--o);margin-top:6px}
+.lead{color:var(--ink2);margin:14px 0 0;max-width:36em}
+.ctrl{padding:10px 20px 10px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12px;color:var(--ink2);margin-bottom:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{appearance:none;border:1px solid var(--rule);background:var(--paper);color:var(--ink2);border-radius:999px;padding:4px 11px;font:inherit;font-size:12.5px;line-height:1.4;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:var(--rule)}
+.chip:focus-visible{outline:2px solid var(--o);outline-offset:2px}
+
+.col{position:relative}
+.stratum{position:relative;padding:26px 20px 30px;color:var(--tc);background:var(--lc)}
+.stratum svg.edge{position:absolute;left:0;right:0;top:-18px;width:100%;height:20px;display:block}
+.stratum .hd{display:grid;grid-template-columns:2.2em 1fr;gap:10px;align-items:start;margin-bottom:10px}
+.stratum .hd b{font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:22px;line-height:1.2;color:var(--o)}
+.stratum .hd h2{font-size:17px;line-height:1.35}
+.stratum .hd p{margin:4px 0 0;font-size:13px;line-height:1.6;opacity:.85}
+.depth{position:absolute;right:16px;top:10px;font-family:"Shippori Mincho B1",serif;font-size:11px;letter-spacing:.14em;opacity:.6}
+.strip{display:block;width:100%;height:46px;margin:0 0 12px;overflow:visible}
+.strip .axis{stroke:currentColor;stroke-opacity:.35;stroke-width:1}
+.strip .tick{font-family:"Shippori Mincho B1",serif;font-size:9px;fill:currentColor;fill-opacity:.6}
+.strip .dot{cursor:pointer;stroke:var(--lc);stroke-width:1.2}
+.strip .dot.on{stroke:currentColor;stroke-width:2}
+.strip .dot.off{opacity:.15;pointer-events:none}
+.nodes{display:flex;flex-wrap:wrap;gap:7px}
+.node{appearance:none;border:1px solid rgba(0,0,0,.18);background:rgba(255,255,255,.55);color:var(--tc);border-radius:999px;padding:5px 11px 5px 9px;font:inherit;font-size:13px;line-height:1.4;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-align:left}
+.node i{width:8px;height:8px;border-radius:50%;background:var(--nc);flex:none}
+.node em{font-style:normal;font-family:"Shippori Mincho B1",serif;font-size:11px;opacity:.7;letter-spacing:.04em}
+.node.on{border-color:var(--nc);box-shadow:0 0 0 2px var(--nc) inset;background:rgba(255,255,255,.85);color:#17191B}
+.node.hide{display:none}
+.node:focus-visible{outline:2px solid var(--o);outline-offset:2px}
+.stratum.dark .node{background:rgba(0,0,0,.28);border-color:rgba(255,255,255,.25)}
+.stratum.dark .node.on{background:rgba(255,255,255,.9);color:#17191B}
+.detail{margin:12px 0 0;padding:12px 14px;border-radius:10px;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.7;border-left:3px solid var(--nc);display:none}
+.detail.show{display:block}
+.detail b{display:block;font-weight:500;margin-bottom:2px}
+.detail .tag{font-size:11px;color:var(--nc);letter-spacing:.06em;margin-left:6px}
+.detail .md{font-size:11px;color:var(--ink3);letter-spacing:.06em;margin-left:6px}
+.spike{padding:22px 20px 28px;background:var(--l4);color:var(--t4);position:relative}
+.spike .hd b{color:#F3B2B6}
+.foot{padding:20px 20px 0;font-size:12px;color:var(--ink3);line-height:1.7}
+@media (min-width:600px){ h1{font-size:38px} .stratum{padding:30px 28px 36px} .ctrl,.foot{padding-left:28px;padding-right:28px} header{padding-left:28px;padding-right:28px} .strip{height:52px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">展覧会構想　概念地図</div>
+  <h1>地層<small>STRATA</small></h1>
+  <p class="lead">スーパーフラットが層を一枚に圧縮する運動だったなら、「地層」は層を重ねたまま時間を堆積させる運動。表層から掘り下げる順に三つの層と人新世の境界を置き、各層に年表の帯と、原点作家・応答作家・理論・貸出元を配置しました。上の媒体で絞り込み、年表の点か項目をタップで補足が出ます。</p>
+</header>
+<div class="ctrl">
+  <div class="legend">
+    <span><i style="background:var(--o)"></i>原点</span>
+    <span><i style="background:var(--r)"></i>応答（現代美術）</span>
+    <span><i style="background:var(--th)"></i>理論・批評</span>
+    <span><i style="background:var(--l)"></i>貸出元・権利者</span>
+    <span><i style="background:var(--c)"></i>文脈・出来事</span>
+  </div>
+  <div class="chips" id="chips">
+    <button class="chip" data-m="" aria-pressed="true">すべて</button>
+    <button class="chip" data-m="film" aria-pressed="false">映画・アニメ</button>
+    <button class="chip" data-m="manga" aria-pressed="false">漫画</button>
+    <button class="chip" data-m="sf" aria-pressed="false">SF・文学</button>
+    <button class="chip" data-m="arch" aria-pressed="false">建築・都市</button>
+    <button class="chip" data-m="art" aria-pressed="false">現代美術</button>
+    <button class="chip" data-m="th" aria-pressed="false">理論・制度</button>
+  </div>
+</div>
+
+<div class="col" id="col"></div>
+
+<p class="foot">地層の厚みは重要度ではなく、掘る順序。年表の帯は1890〜2026年で、それ以前の項目は左端に寄せています。原点作家の原画は全集チーム・河出書房新社・スタジオジブリとの協議が前提で、展示の重心は応答作家の作品に置く。未確認の項目は補足に明記。</p>
+</div>
+
+<script>
+const T = {o:"原点", r:"応答", th:"理論・批評", l:"貸出元・権利者", c:"文脈・出来事"};
+const M = {film:"映画・アニメ", manga:"漫画", sf:"SF・文学", arch:"建築・都市", art:"現代美術", th:"理論・制度"};
+// node: [type, medium, year, name, detail]
+const LAYERS = [
+ {id:"s0", mark:"表", title:"表層：圧縮された平面（2000〜）", depth:"0 m", lc:"var(--l0)", tc:"var(--t0)", dark:false,
+  desc:"掘り始める地点。スーパーフラットが日本の視覚文化を一枚の表面として外側へ説明した層。『地層』はその補集合として、ここから下へ降りる。",
+  nodes:[
+   ["th","th",2000,"村上隆「スーパーフラット」","浮世絵から漫画・アニメまでを平面性の系譜として束ね、2005年『リトルボーイ』展で戦後日本の幼児性と結びつけた。『地層』が対にする相手。否定ではなく補集合として置く。"],
+   ["th","th",2009,"ラマール『The Anime Machine』","アニメを多層画像として捉え、宮崎の方法をレイヤーを遠近法に縛らず重ねる「オープン・コンポジティング」と呼ぶ。スーパーフラットも層の密度の一変種として分析。『地層』の定義はここを踏む。"],
+   ["th","th",2009,"「奥行きは密度に置き換わる」","ラマールの定式。大友の描き込みは奥行きではなく密度であり、密度が時間を含むとき地層になる。概念の核になる一文。"],
+   ["c","th",2019,"大英博物館「マンガ」展","漫画原画が欧米の美術館で大規模に扱われた画期。漫画を美術の対象にする前提が国際的に整った。"],
+   ["c","th",2025,"国立新美術館×M+「日本の現代美術と世界 1989–2010」","1989〜2010年の日本現代美術を国際的に再編集する館の動き。スーパーフラット以後をどう語るかが制度側でも問われている。"],
+   ["c","th",2025,"森美術館「MAMリサーチ011：東京アンダーグラウンド 1960-1970年代」","大澤啓（東大総合研究博物館）と椰玲子の企画。ポスター・チラシ・入場券・雑誌などエフェメラを中心に、「出来事」と「場所」からアングラの盛衰を再構成した調査展。記録集も刊行。地下の文化を資料で見せる方法論の直近の前例で、『地層』の資料部分の参照先。所蔵者の大澤は協力候補。"],
+   ["l","th",1997,"高橋龍太郎コレクション","池田学《興亡史》、山口晃、鴻池朋子、会田誠、横尾忠則を所蔵。応答作家の核を一つの貸出元で揃えられる。"],
+   ["c","film",1999,"『マトリックス』","ウォシャウスキーが『AKIRA』『攻殻機動隊』の参照を公言。日本のアニメ表現がハリウッドの文法に入り、海外で大友が「作者」になる回路の到達点。"]
+  ]},
+ {id:"s1", mark:"Ａ", title:"堆積層：都市 — 上書きされる東京", depth:"−1 m", lc:"var(--l1)", tc:"var(--t1)", dark:false,
+  desc:"震災・戦災・復興・五輪・再開発・震災・五輪。壊れては建つ東京の反復が、瓦礫として堆積する層。展覧会の本線。",
+  nodes:[
+   ["c","arch",1923,"関東大震災と帝都復興","東京が丸ごと焼け、後藤新平の復興計画で道路と公園が引き直された。ネオ東京が前提にする最初の上書き。"],
+   ["c","arch",1927,"今和次郎「考現学」","関東大震災後のバラック装飾と風俗を採集した学。壊れた都市の表層を記録する東京の方法の起点で、深作光貞『新宿考現学』（1968）、路上観察学会（1986）へ続く。"],
+   ["c","arch",1968,"「新宿メディアポリス宣言」／『新宿プレイマップ』","新都心新宿PR委員会が新宿を「メディアポリス」と宣言。アングラの場であった新宿が、同時に再開発の対象として宣伝された。地下と上書きが同じ場所で起きた例（森美術館MAMリサーチ011出品資料）。"],
+   ["c","arch",1969,"万博破壊共闘派「万博粉砕ブラック・フェスティバル」／東京ハンパク","1970年大阪万博（未来都市の大衆化）への反対運動。未来都市を壊そうとする側が現実にいた記録で、『千年王国』ではなく『万博黒書』。『AKIRA』の反政府ゲリラの実在の前史として読める（MAMリサーチ011出品資料）。"],
+   ["c","arch",1971,"三里塚（三留理男『燃える北総台地』）","空港建設と農民の土地闘争。小川紳介が『三里塚』連作で記録し、その後山形の村へ移って『1000年刻みの日時計』に至る。土地をめぐる闘争から、土地を掘る映画へ。"],
+   ["c","arch",1986,"路上観察学会（赤瀬川原平・藤森照信・南伸坊）","トマソン、建築探偵。再開発の表面に残った無用の痕跡を採集する。考現学の現代版で、アングラの赤瀬川が都市の地層読みに転じた地点。建築側から地下を語る候補。"],
+   ["c","film",1954,"『ゴジラ』","水爆実験で目覚めた怪獣が東京を焼く。『宇宙戦争』から『AKIRA』へ続く「東京が壊れる図像」の戦後の起点。"],
+   ["c","arch",1960,"丹下健三「東京計画1960」／メタボリズム","湾へ伸びる都市軸と新陳代謝する建築。ネオ東京の建築的な前史。"],
+   ["c","arch",1962,"磯崎新《孵化過程》《再び廃墟になったヒロシマ》","未来の建築を廃墟として描いた建築家。1968年の《再び廃墟になったヒロシマ》は、都市が壊れた後を建築側から想像した最初期の図像。『AKIRA』の冒頭と直接響く。"],
+   ["c","arch",1964,"東京オリンピック、首都高","都市を上書きする祝祭。『AKIRA』の2020年五輪はこの反復。"],
+   ["c","film",1968,"キューブリック『2001年宇宙の旅』","大友が繰り返し挙げる作家。空間の冷たさ、無音の暴力。"],
+   ["c","arch",1972,"高島平団地／中銀カプセルタワー","『童夢』の団地のモデルと、メタボリズムの実作（2022年解体）。戦後空間と新陳代謝の夢が同じ年に建った。"],
+   ["c","film",1971,"土本典昭『水俣 患者さんとその世界』","汚染が土地と身体に堆積する過程を記録した。人新世の境界（1953）と同じ層に属する日本の映画。"],
+   ["c","film",1977,"タルコフスキー『惑星ソラリス』（岩波ホール上映）","記憶が物質になる惑星。岩波ホールのエキプ・ド・シネマ初期の成功作で、日本の観客が「土地が記憶する」SFに触れた入口。キーファーの2025年二条城展の題もここから。"],
+   ["c","film",1981,"タルコフスキー『ストーカー』","ゾーン＝汚染された土地が聖域になる。『ナウシカ』の腐海と並べて語られる、汚染と浄化の層の映画。"],
+   ["c","film",1982,"小川紳介『ニッポン国古屋敷村』／『1000年刻みの日時計 牧野村物語』","山形の村に住み込み、土を掘り、稲と気象と村の千年を記録した小川プロの連作（1982／1986）。地層という概念の映画的な原型。展覧会で上映するなら第一候補。"],
+   ["c","film",1983,"ヘルツォーク『アギーレ 神の怒り』（岩波ホール上映）","密林と征服の狂気。岩波ホールはヘルツォークで始まりヘルツォークで終わった（最終上映は2022年『歩いて見た世界』）。"],
+   ["c","sf",1973,"小松左京『日本沈没』","列島が沈む終末SF。小説と映画が同年に大ヒットし、終末ブームの口火を切った。"],
+   ["o","manga",1980,"大友克洋『童夢』","マンモス団地の超能力戦。背景が主役になった最初の作品。高島平という戦後空間の化石。"],
+   ["o","manga",1982,"大友克洋『AKIRA』","ネオ東京の瓦礫は東京の地層そのもの。アキラは地下に埋められている。本人は瓦礫の写真集を参考にしたと明言。"],
+   ["o","manga",1982,"宮崎駿『風の谷のナウシカ』（漫画版）","腐海は千年かけて汚染を浄化する堆積層で、底に清浄な世界がある。漫画版は映画より地層の構造が明確。"],
+   ["c","film",1982,"『ブレードランナー』とシド・ミード","雨とネオンのアジア的未来都市。大友がCINRA対談でシド・ミードを語る。"],
+   ["c","sf",1984,"ギブスン『ニューロマンサー』","『AKIRA』と同時に別の場所で立ち上がった都市の未来像。サイバーパンクの命名。"],
+   ["th","arch",1985,"陣内秀信『東京の空間人類学』／鈴木博之『東京の地霊』","江戸の地形が現代東京の下に残っていることを示した建築史。1990年の『東京の地霊』は土地の記憶を「ゲニウス・ロキ」として読む。Ａ層とＣ層をつなぐ理論。"],
+   ["r","art",1988,"宮本隆司『建築の黙示録』","バブル期の解体現場を廃墟として撮った写真集。『AKIRA』映画と同年。"],
+   ["o","film",1988,"映画『AKIRA』","海外で「ジャパニメーション」の先駆けとされる。同年にEpic版の彩色英訳。"],
+   ["c","film",1989,"塚本晋也『鉄男』","肉体と金属の融合。『AKIRA』と並んで和製サイバーパンクとして海外で受容。"],
+   ["c","arch",1991,"東京都庁の新宿移転、バブル崩壊","丹下設計の新都庁が開庁し、同時に地価が崩れた。上書きが止まった最初の瞬間。"],
+   ["c","arch",1995,"阪神・淡路大震災","描かれてきた破壊が現実の都市で起きた年。"],
+   ["c","manga",1995,"『新世紀エヴァンゲリオン』","第3新東京市、少年と兵器。『AKIRA』の破壊と再生の構図を90年代に引き継いだ。"],
+   ["c","arch",2003,"六本木ヒルズ開業","森ビルの「垂直庭園都市」。バブル後に再開した大規模再開発の始まり。"],
+   ["r","art",2006,"池田学《興亡史》《誕生》","ペン画の超密描で崩壊と再生を描く。3.11後の《誕生》（2016）は本展の中心候補。高橋コレクション所蔵／ミヅマ。"],
+   ["r","art",2004,"山口晃","東京の俯瞰図と絵巻の構図で、過去と現在を同じ画面に堆積させる。高橋コレクション所蔵／ミヅマ。"],
+   ["c","arch",2011,"東日本大震災","瓦礫の都市のイメージが再び現実に。鴻池朋子の転回点でもある。"],
+   ["r","art",2011,"Chim↑Pom","震災後の福島と渋谷に介入した作品群。現代美術が「壊れる東京」を主題にした代表例。"],
+   ["c","film",2016,"『シン・ゴジラ』","東京の破壊を官僚機構の目線で描き直した。3.11以後のゴジラ。"],
+   ["c","arch",2021,"東京オリンピック無観客開催","『AKIRA』の「中止だ中止」が現実と二重写しに。作品が都市史の一部になる現象自体を展示する。"],
+   ["l","th",2021,"スタジオジブリ","アカデミー映画博物館に約400点を貸した前例。ただし相手は美術館規模の共同企画。公立館か財団との共催が条件。"],
+   ["l","th",2022,"講談社『大友克洋全集』チーム","大友の原画・資料はここを通さないと動かない。全集の印刷資料・絵コンテ集が現実的な出品物。"],
+   ["r","art",2025,"アンゼルム・キーファー（海外）","地層と歴史の画家。2025年に二条城で「ソラリス」。国際文脈を一点で立てる候補。"]
+  ]},
+ {id:"s2", mark:"Ｂ", title:"密度層：線 — 写実と空間の技法史", depth:"−2 m", lc:"var(--l2)", tc:"var(--t2)", dark:false,
+  desc:"絵巻から手塚、劇画、ちばてつや、メビウス、ディズニーの観察を経て「大友以後」へ。線の密度が時間を含む層。",
+  nodes:[
+   ["c","manga",1170,"『伴大納言絵巻』／浮世絵","横に流れる画面と、輪郭線で空間を組む構図。大友が『火要鎮』で絵巻を明言。"],
+   ["c","film",1940,"ディズニー『ファンタジア』","動きの観察と誇張の規範。大友が1980年『スターログ』で明言。"],
+   ["c","manga",1952,"手塚治虫『鉄腕アトム』","記号化されたキャラクターの体系。大友はこれを前提にしつつ写実へ離れた。『童夢』期に「テンポが速すぎた」と語る。"],
+   ["c","manga",1959,"劇画工房","批評は大友の写実を劇画の延長に置くが、本人の明言はない。"],
+   ["th","manga",1967,"『漫画主義』（1967〜74、装画：赤瀬川原平）","石子順造・権藤晋らの漫画批評誌。つげ義春や白土三平を論じ、漫画の線を批評の対象にした最初期の場。夏目（1992）の前史。アングラと漫画批評が同じデザイナーを共有していた（MAMリサーチ011出品資料）。"],
+   ["c","manga",1970,"横尾忠則『週刊少年マガジン』表紙","アングラのデザインが少年誌の表紙に入った。漫画と前衛の接触面。大友が『漫画アクション』でデビューする3年前。"],
+   ["c","manga",1972,"赤塚不二夫編『まんがNo.1』","赤塚がアングラ人脈（横尾装画）で作った実験誌。商業漫画の内側から地下に接続した例。漫画ニューウェーブ（1979）の土壌。"],
+   ["c","film",1969,"『イージー・ライダー』","2013年「爆音大友克洋」で本人が上映を希望。初期短編の乾いた空気。"],
+   ["c","film",1980,"ヴィスコンティ『ルードヴィヒ』『家族の肖像』（岩波ホール上映）","装飾と密度の映画。ロングランを記録し、80年代東京に「密度の高い画面」を見る教養をつくった。線の密度の映画版。"],
+   ["c","th",1983,"シネ・ヴィヴァン六本木／ユーロスペース／シネマライズ","ミニシアターの時代（1982〜86開館）。ゴダール、ストローブ＝ユイレ、エリセが東京で見られるようになり、大友以後の世代の映画的教養の場になった。岩波ホールはその先駆け。"],
+   ["c","manga",1972,"村野守美の現場","大友が最初に経験した漫画の現場。擬音をフキダシに入れる手法など（本人明言）。"],
+   ["c","manga",1973,"ちばてつや『のたり松太郎』","「歩き方のスピードがちょうど同じ」と随分勉強した（本人明言）。写実のテンポの出所。"],
+   ["o","manga",1974,"諸星大二郎の描線","『生物都市』で手塚賞。誰にも真似できないと言われる画風。手塚と24年組の間に位置づけられ、渋澤龍彦やダリの影響が指摘される。"],
+   ["c","manga",1975,"メビウス『メタル・ユルラン』","均一な線で空間を埋める密度。大友との相互影響は双方が公言。"],
+   ["c","sf",1977,"スタジオぬえ『宇宙の戦士』","メカデザインの影響源として本人が明言。"],
+   ["o","manga",1979,"大友克洋の線","写実の出所は村野守美の現場、ちばてつやのテンポ、メビウスの引いた視点、ディズニーの観察。人物も背景も同じ質感の「もの」として描く均質空間。"],
+   ["c","manga",1980,"鳥山明『Dr.スランプ』","大友の影響を公言する作家の代表。密度が少年誌の主流に入る。"],
+   ["o","film",1984,"宮崎駿のオープン・コンポジティング","セルのレイヤーを滑らせて風景が開ける感覚をつくる方法。アカデミー映画博物館展は宮崎の美術設定の複雑な垂直構造に焦点を当てた。"],
+   ["c","manga",1985,"士郎正宗『アップルシード』","大友的な密度を情報と機械の方向へ。『攻殻機動隊』へ。"],
+   ["th","th",1992,"夏目房之介『手塚治虫はどこにいる』","漫画を線と記号で読む批評の起点。"],
+   ["l","th",1994,"ミヅマアートギャラリー","池田学、山口晃の窓口。"],
+   ["r","art",1995,"寺田克也／浦沢直樹","大友以後の線を美術側に接続する候補。浦沢は2025年『漫勉neo』で大友と対談。"],
+   ["th","th",2005,"伊藤剛『テヅカ・イズ・デッド』","「キャラ／キャラクター」の区別で漫画の身体を論じた。大友以後の線を理論化する前提。"],
+   ["r","art",2006,"大竹伸朗","スクラップブックは堆積そのもの。線ではなく貼り込みの密度で時間を含む。2006年「全景」展。"],
+   ["th","th",2012,"ササキバラ・ゴウ「均質な空間」","絵から説明的な意味を取り去り、人物も風景も同じ質感で描くことで作品世界の均質空間を可能にしたという定義。"],
+   ["r","art",2013,"会田誠","AERAの特集で大友からの影響を語った。現代美術側から大友を公言した例。高橋コレクション所蔵。"],
+   ["r","art",2016,"風間サチコ","木版の密度で近代日本の暗部を彫る。《ディスリンピック2680》は五輪と優生思想を一枚に堆積させた。"],
+   ["l","th",2021,"河出書房新社","諸星の回顧展（5館巡回、原画約350点）の協力元。三人の中で最も動かしやすい。"]
+  ]},
+ {id:"s3", mark:"Ｃ", title:"基層：地下 — 土着・猟奇・超能力", depth:"−3 m", lc:"var(--l3)", tc:"var(--t3)", dark:true,
+  desc:"民俗学、探偵小説、伝奇SF、オカルト、落語、今村昌平とATG。三人の本棚の重心で、SFの下に敷かれた層。本人の明言が最も厚い。1960年代後半の「アングラ」は文字どおりこの層の名前で、三人が出発した年代の東京の地下。",
+  nodes:[
+   ["c","sf",1898,"ウェルズ『宇宙戦争』","大友が「心に残る一冊」に挙げた。帝都が壊れる光景を逃げる目線で追う。"],
+   ["c","sf",1910,"柳田國男『遠野物語』","大友の10冊。三人に共通する民俗学の土台。"],
+   ["c","sf",1926,"乱歩『鏡地獄』／夢野久作『ドグラ・マグラ』","大友が漫画化した乱歩と、10冊の夢野。昭和モダンの猟奇と迷宮。"],
+   ["c","sf",1939,"折口信夫『死者の書』","大友が『BOOGIE WOOGIE WALTZ』で意識。死者の声から始まる古代幻想。"],
+   ["th","art",1952,"岡本太郎「縄文土器論」","近代の下を掘って日本美術を更新した最初の例。『地層』の美術史的な起点。"],
+   ["c","film",1963,"今村昌平『にっぽん昆虫記』／ATG","大友の血肉の7本。土着と欲望の「汚れた写実」。"],
+   ["c","manga",1965,"水木しげる／つげ義春『ねじ式』","描き込まれた背景（大友明言）と、『ガロ』から出た土着と悪夢の頂点（1968）。"],
+   ["c","sf",1971,"半村良『石の血脈』","大友の10冊の筆頭。超能力と古代神話を現代都市に接続する伝奇SF。『AKIRA』の「アキラ」神話化と同じ型。"],
+   ["c","film",1971,"寺山修司『書を捨てよ町へ出よう』","大友のDVD所有リストにある。都市の若者と土着の記憶をぶつけた70年代前衛。"],
+   ["c","th",1962,"ATG（日本アート・シアター・ギルド）／新宿文化・蠍座","岩波ホールの先駆けとされるアート系上映の場。大友の血肉の7本に『心中天網島』（ATG）。地下の映画が地下の劇場で見られた時代。"],
+   ["c","art",1964,"ゼロ次元（加藤好弘）","「尻蔵箱詰め送儀」など、術的な儀礼の形をとるパフォーマンス。土着の儀礼を都市で反復したアングラの身体。"],
+   ["c","art",1965,"土方巽と暗黒舞踏","「暗黒」を名乗った身体表現。東北の土と死者の身体。大駱駝艦（1972）へ。無二宿と東北がここでつながる。"],
+   ["c","film",1966,"草月アートセンター「アンダーグラウンド・シネマ 日本・アメリカ」","米国の実験映画を通して「アンダーグラウンド」が日本に輸入された起点（森美術館の整理）。地下という言葉が東京に入った年。"],
+   ["th","art",1967,"『美術手帖』「Underground Arts Diagram」","特集「日本のアンダーグラウンド・アート」に載った相関図。地下の文化を地図にした最初の例で、この概念地図の直接の先祖。"],
+   ["c","art",1967,"状況劇場の紅テント（花園神社）／天井桟敷旗揚げ","唐十郎が神社の境内にテントを建てた。土着の場に前衛を置く、という構造そのものが『地層』。寺山の天井桟敷も同年。記録写真は羽永光利・平田実。"],
+   ["c","art",1967,"部族 The Tribes（山田塊也）","ヒッピー・コミューン。諹訪之瀬島への土着回帰。アングラが都市を出て島と村に向かった例。"],
+   ["c","th",1968,"『これがアングラだ！』（双葉社）","アングラのガイド本。版元は双葉社で、5年後に大友が『漫画アクション』でデビューするのと同じ社。地下の出版と大友の出発点が重なる。"],
+   ["c","art",1969,"山下洋輔トリオ『Dancing古事記』","フリージャズが記紀神話を題にした。新宿文化の「フリージャズ・イン・アートシアター」（1973）へ。7年後の諸星『暗黒神話』と同じ古層への回帰。"],
+   ["c","film",1969,"大島渚『新宿泥棒日記』／松本俊夫『薔薇の葬列』","新宿という地下都市を撮った二本。唐十郎、横尾忠則、状況劇場がそのまま出演。松本は後に『ドグラ・マグラ』（1988）を撮る。"],
+   ["c","film",1968,"今村昌平『神々の深き欲望』","南島の神話と近親相姦、土着の神と近代の侵入。今村の土着志向の頂点で、Ｃ層の映画の中心に置ける。"],
+   ["c","th",1974,"岩波ホール「エキプ・ド・シネマ」開始（『大樹のうた』）","欧米以外の名作と大手が扱わない名作を上映する運動。54年で65カ国271作品。土地と歴史を掘る映画が東京で見られた場所で、展覧会の上映部門の参照先。"],
+   ["c","film",1974,"寺山修司『田園に死す』","恐山、イタコ、村の記憶。土着を前衛の形式で掘った映画。"],
+   ["c","film",1975,"黒澤明『デルス・ウザーラ』","シベリアの森に生きる先住の猟師。黒澤が日本の外で撮った、土地と人の映画。大友の血肉の7本の黒澤の、もう一つの面。"],
+   ["c","film",1978,"『ピロスマニ』（岩波ホール上映）","ジョージアの民衆画家の生涯。素朴画と土着の記憶。岩波ホールのジョージア映画紹介の起点で、2022年の閉館期にも「ジョージア映画祭」が組まれた。"],
+   ["c","film",1979,"アンゲロプロス『旅芸人の記録』（岩波ホール上映）","ギリシャ現代史を旅芸人の一座の移動で積層させる。歴史の地層そのものを映画の形式にした作品で、概念の映画的な定義に最も近い。"],
+   ["c","film",1985,"柳町光男『火まつり』","熊野の山と神、開発と自然の衝突。『もののけ姫』の12年前に、同じ主題を実写で撮った映画。"],
+   ["c","film",1988,"『芙蓉鎮』／『八月の鯨』（岩波ホール上映）","文革の記憶と、老いの記憶。岩波ホールがロングランで見せた「記憶の層」の映画。"],
+   ["c","film",2022,"岩波ホール閉館、最終上映『歩いて見た世界 ブルース・チャトウィンの足跡』","考古学を学び先史に惹かれた作家の軌跡を、ヘルツォークが追う。54年の上映史が、掘る人の映画で閉じた。"],
+   ["c","sf",1974,"超能力ブーム（ユリ・ゲラー来日）","『童夢』『AKIRA』『幻魔大戦』が読まれた空気。"],
+   ["c","sf",1975,"筒井康隆『七瀬ふたたび』","超能力者の少女が同類と出会い、追われる。『童夢』『AKIRA』の子どもたちの文学側の先例。"],
+   ["c","film",1976,"角川映画『犬神家の一族』","横溝ブーム。大友の本棚に横溝多数。田舎の旧家、血縁、猟奇。"],
+   ["o","manga",1976,"諸星大二郎『暗黒神話』『妖怪ハンター』『マッドメン』","記紀神話、古墳、地底を掘り返す考古学的想像力。柳田・折口の民俗学を漫画に翻訳した人。回顧展では民俗資料と美術作品を併置した前例あり。"],
+   ["c","sf",1979,"平井和正『幻魔大戦』","大友の本棚にあり、1983年映画版でキャラデザを担当。超能力者が世界の終わりと戦う伝奇SF。"],
+   ["o","manga",1980,"大友克洋『童夢』と本棚","半村良、乱歩、夢野久作、横溝、柳田、折口。超能力と古代神話を現代都市に接続する手つき。"],
+   ["r","art",1981,"横尾忠則","画家宣言以後、UFO・滝・オカルトを描く。70年代オカルトが美術に流れ込んだ例。高橋コレクション所蔵。"],
+   ["c","film",1988,"松本俊夫『ドグラ・マグラ』","大友が「良い」と語る映画化。実験映画の作家による唯一の奇書映画化。"],
+   ["c","sf",1995,"地下鉄サリン","超能力と終末のブームがオウムという形で終わった年。"],
+   ["o","film",1997,"宮崎駿『もののけ姫』","公開時に網野善彦・梅原猛と対談し照葉樹林文化論を語る。シシ神の森は太古の照葉樹林。現代の下に古層の神が眠る構造。"],
+   ["c","film",1997,"未確認：宮崎→諸星","宮崎が諸星のファンで、コダマが『マッドメン』に由来するという話は流布しているが、一次発言は未確認。文章に使う前に要確認。"],
+   ["th","arch",2005,"中沢新一『アースダイバー』","縄文の海岸線を現代東京に重ねて歩く。梅原猛の縄文論の現代版で、Ａ層の都市とＣ層の地下を一本でつなぐ。"],
+   ["r","art",2011,"鴻池朋子","東日本大震災以降、地球の振動を画材と感じ、土木工事や縫いものをメディアとした「絵」を描く。概念との接続が最も強い。ギャルリー宮脇で2026年10〜11月個展。"],
+   ["c","film",2021,"『イノセンツ』","ノルウェーの団地のサイキックスリラー。『童夢』からの着想を公言。地下層が海外に届いた例。"],
+   ["th","th",2024,"東京国立近代美術館「ハニワと土偶の近代」","この系譜を美術史として扱ったばかりの展覧会。『地層』はその続編として館に説明できる。"],
+   ["r","art",2027,"CON_の作家（応答作品の枠）","新作コミッションの枠。地下層への応答として、ギャラリーの重心を置く場所。"]
+  ]}
+];
+
+const Y0=1890, Y1=2030;
+const col = document.getElementById('col');
+const EDGE = '<svg class="edge" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 L0 12 C40 4 70 18 110 10 C150 2 180 16 220 9 C260 2 300 18 340 8 C370 2 390 12 400 10 L400 20 Z" fill="FILL"/></svg>';
+let curM = '';
+
+LAYERS.forEach((L,i)=>{
+  L.nodes.sort((a,b)=>a[2]-b[2]);
+  const sec = document.createElement('section');
+  sec.className='stratum'+(L.dark?' dark':''); sec.id=L.id;
+  sec.style.setProperty('--lc',L.lc); sec.style.setProperty('--tc',L.tc);
+  // timeline strip
+  let strip = '<svg class="strip" viewBox="0 0 400 46" preserveAspectRatio="none" aria-hidden="true">';
+  strip += '<line class="axis" x1="4" y1="30" x2="396" y2="30"/>';
+  [1900,1925,1950,1975,2000,2025].forEach(y=>{ const x=4+(y-Y0)/(Y1-Y0)*392; strip += '<line class="axis" x1="'+x+'" y1="27" x2="'+x+'" y2="33"/><text class="tick" x="'+x+'" y="44" text-anchor="middle">'+y+'</text>'; });
+  // stack dots on same year
+  const seen = {};
+  L.nodes.forEach((n,j)=>{
+    const y = Math.max(n[2], Y0); const x = 4+(y-Y0)/(Y1-Y0)*392;
+    const k = Math.round(x/6); seen[k]=(seen[k]||0)+1; const cy = 30 - (seen[k]-1)*7 - 2;
+    strip += '<circle class="dot" data-i="'+j+'" cx="'+x+'" cy="'+cy+'" r="3.2" fill="var(--'+n[0]+')"><title>'+(n[2]<Y0?'':n[2]+' ')+n[3]+'</title></circle>';
+  });
+  strip += '</svg>';
+  let html = (i===0?'':EDGE.replace('FILL',L.lc)) + '<div class="depth">'+L.depth+'</div><div class="hd"><b>'+L.mark+'</b><div><h2>'+L.title+'</h2><p>'+L.desc+'</p></div></div>' + strip + '<div class="nodes">';
+  L.nodes.forEach((n,j)=>{
+    const yl = n[2]<Y0 ? (n[2]<1500?'12世紀〜':n[2]) : n[2];
+    html += '<button class="node" data-i="'+j+'" data-m="'+n[1]+'" style="--nc:var(--'+n[0]+')"><i></i><em>'+yl+'</em>'+n[3]+'</button>';
+  });
+  html += '</div><div class="detail"></div>';
+  sec.innerHTML = html;
+  col.appendChild(sec);
+  function select(j){
+    const n = L.nodes[j]; const d = sec.querySelector('.detail');
+    const b = sec.querySelector('.node[data-i="'+j+'"]'); const dot = sec.querySelector('.dot[data-i="'+j+'"]');
+    const was = b.classList.contains('on');
+    sec.querySelectorAll('.node').forEach(x=>x.classList.remove('on'));
+    sec.querySelectorAll('.dot').forEach(x=>x.classList.remove('on'));
+    if(was){ d.classList.remove('show'); return; }
+    b.classList.add('on'); dot.classList.add('on');
+    d.style.setProperty('--nc','var(--'+n[0]+')');
+    d.innerHTML = '<b>'+(n[2]<Y0&&n[2]<1500?'12世紀〜':n[2])+'　'+n[3]+'<span class="tag">'+T[n[0]]+'</span><span class="md">'+M[n[1]]+'</span></b>'+n[4];
+    d.classList.add('show');
+  }
+  sec.addEventListener('click', e=>{
+    const b = e.target.closest('.node'); const dot = e.target.closest('.dot');
+    if(b) select(+b.dataset.i); else if(dot) select(+dot.dataset.i);
+  });
+});
+
+const spike = document.createElement('section');
+spike.className='spike';
+spike.innerHTML = EDGE.replace('FILL','var(--l4)').replace('class="edge"','class="edge" style="position:absolute;left:0;right:0;top:-18px;width:100%;height:20px"') + '<div class="depth">境界</div><div class="hd"><b>1953</b><div><h2>人新世の境界</h2><p>別府湾の堆積物が人新世の標準補助境界模式地に選ばれ、人為痕跡数の急増点は1953年。翌1954年に大友克洋が生まれ、『ゴジラ』と『七人の侍』が公開された。人新世の境界が日本の海底の泥に刻まれた年に、東京を壊す怪獣が生まれた。展覧会の導入に置く事実。</p></div></div>';
+col.appendChild(spike);
+
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click', ()=>{
+  document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+  ch.setAttribute('aria-pressed','true'); curM = ch.dataset.m;
+  document.querySelectorAll('.stratum').forEach(sec=>{
+    sec.querySelectorAll('.node').forEach(b=>b.classList.toggle('hide', curM && b.dataset.m!==curM));
+    sec.querySelectorAll('.dot').forEach(dot=>{ const b = sec.querySelector('.node[data-i="'+dot.dataset.i+'"]'); dot.classList.toggle('off', b.classList.contains('hide')); });
+  });
+}));
+</script>
+</body>
+</html>

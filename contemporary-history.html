@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>大友克洋の同時代史 1945–2026 — 映画／SF／テクノロジー／社会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E9EAE6; --paper:#F4F4F1; --ink:#15181B; --ink2:#4E5358; --ink3:#8A9096; --rule:#C9CCC6;
+  --spine:#B5121B; --spine-soft:#F6DDDE;
+  --film:#6B5B95; --sf:#3E7D5A; --tech:#2F6F8F; --soc:#8A7A4E; --cul:#8B4A6B;
+  --film-soft:#E6E1F0; --sf-soft:#DDEAE2; --tech-soft:#DCE8EF; --soc-soft:#EDE8D8; --cul-soft:#EFDFE7;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#1B1E21; --paper:#24282C; --ink:#E6E4DD; --ink2:#B4B2AA; --ink3:#7E837F; --rule:#3A3F43;
+  --spine:#E5424B; --spine-soft:#3A1F22;
+  --film:#B0A4D6; --sf:#8CC3A2; --tech:#7FB3CE; --soc:#C8B57E; --cul:#D28AB0;
+  --film-soft:#2F2A40; --sf-soft:#223A2D; --tech-soft:#223844; --soc-soft:#3A3524; --cul-soft:#3C2733; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#1B1E21; --paper:#24282C; --ink:#E6E4DD; --ink2:#B4B2AA; --ink3:#7E837F; --rule:#3A3F43;
+  --spine:#E5424B; --spine-soft:#3A1F22;
+  --film:#B0A4D6; --sf:#8CC3A2; --tech:#7FB3CE; --soc:#C8B57E; --cul:#D28AB0;
+  --film-soft:#2F2A40; --sf-soft:#223A2D; --tech-soft:#223844; --soc-soft:#3A3524; --cul-soft:#3C2733; color-scheme:dark;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 90px}
+h1,h2{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:700;margin:0}
+header{padding:54px 0 22px;border-bottom:1px solid var(--rule)}
+.range{font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:13px;color:var(--ink3);letter-spacing:.12em;margin-bottom:10px}
+h1{font-size:28px;line-height:1.3}
+.lead{margin:16px 0 0;color:var(--ink2);max-width:36em}
+.controls{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--rule);margin-bottom:6px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{appearance:none;border:1px solid var(--rule);background:var(--paper);color:var(--ink2);border-radius:999px;padding:4px 11px;font:inherit;font-size:12.5px;line-height:1.4;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--c);display:inline-block;flex:none}
+.chip[aria-pressed="true"]{border-color:var(--c);color:var(--ink);background:var(--soft)}
+.chip.ev{--c:var(--ink2);--soft:var(--rule)}
+.legend{font-size:12px;color:var(--ink3);margin-top:7px;line-height:1.6}
+.legend b{font-weight:500;color:var(--ink2)}
+.decade{position:relative;padding:30px 0 2px}
+.decade h2{font-size:15px;font-weight:500;color:var(--ink3);letter-spacing:.14em;padding-left:64px;margin-bottom:4px;font-family:"Shippori Mincho B1",serif}
+.decade h2 small{display:block;letter-spacing:.02em;color:var(--ink2);font-size:12.5px;font-weight:500;margin-top:2px}
+.tl{position:relative;margin:0;padding:0;list-style:none}
+.tl::before{content:"";position:absolute;left:54px;top:0;bottom:0;width:2px;background:var(--spine);opacity:.85}
+.ev{position:relative;display:grid;grid-template-columns:46px 1fr;gap:0 18px;padding:5px 0}
+.ev .yr{font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:12.5px;color:var(--ink3);text-align:right;padding-top:5px;letter-spacing:.04em}
+.ev .node{position:absolute;left:49px;top:12px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--lc)}
+.ev.otomo .node{background:var(--spine);border-color:var(--spine);width:13px;height:13px;left:48px;top:11px}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:9px;padding:7px 11px 7px 12px;position:relative}
+.card::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;background:var(--lc)}
+.ev.otomo .card{border-color:var(--spine);background:var(--spine-soft)}
+.ev.otomo .card::before{display:none}
+.card .t{font-weight:500;font-size:14.5px;line-height:1.5}
+.ev.otomo .card .t{font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:15.5px}
+.card .n{color:var(--ink2);font-size:13.2px;line-height:1.65;margin-top:2px}
+.card .m{font-size:11px;color:var(--lc);letter-spacing:.06em;margin-top:3px}
+.card .m .st{color:var(--spine);margin-left:8px}
+.ev.hide{display:none}
+.foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--rule);color:var(--ink3);font-size:12px;line-height:1.7}
+@media (min-width:600px){ h1{font-size:36px} .wrap{padding:0 28px 100px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="range">1945 ― 2026</div>
+  <h1>大友克洋の同時代史<br>映画／SF／テクノロジー／社会</h1>
+  <p class="lead">大友の前後に、映画、SF、テクノロジー、社会で何が起きていたかを同じ時間軸に並べた年表。赤い軸が大友本人の仕事。「本人明言」は大友自身がインタビュー・アンケート・所蔵リストで名を挙げたもの。それ以外は同時代の出来事で、大友との関係は注に書くか、書かない。</p>
+</header>
+
+<div class="controls">
+  <div class="chips">
+    <button class="chip" data-l="otomo" aria-pressed="true" style="--c:var(--spine);--soft:var(--spine-soft)"><i></i>大友</button>
+    <button class="chip" data-l="film" aria-pressed="true" style="--c:var(--film);--soft:var(--film-soft)"><i></i>映画・アニメ</button>
+    <button class="chip" data-l="sf" aria-pressed="true" style="--c:var(--sf);--soft:var(--sf-soft)"><i></i>SF（文学・漫画・特撮）</button>
+    <button class="chip" data-l="tech" aria-pressed="true" style="--c:var(--tech);--soft:var(--tech-soft)"><i></i>テクノロジー</button>
+    <button class="chip" data-l="soc" aria-pressed="true" style="--c:var(--soc);--soft:var(--soc-soft)"><i></i>社会・事件</button>
+    <button class="chip" data-l="cul" aria-pressed="true" style="--c:var(--cul);--soft:var(--cul-soft)"><i></i>音楽・美術・本</button>
+    <button class="chip ev" id="onlyStated" aria-pressed="false">本人明言だけ</button>
+  </div>
+  <p class="legend"><b>本人明言</b>＝影響源・愛好として大友が挙げたもの。ただしそれ以外の同時代項目も、大友の作品がどの空気の中で描かれたかを示す。</p>
+</div>
+
+<div id="timeline"></div>
+
+<p class="foot">主な根拠：『BRUTUS特別編集 合本・大友克洋』、『芸術新潮』2012年4月号、『Akira club』（1995）、BDfile（2013）、MANTANWEB（2018）、CINRA（2019）。テクノロジーと社会の年は一般的な記録による。『AKIRA』の色数とCG使用の細部、各作品の製作費は当時の公表資料に基づく記憶で、一次確認を要する。</p>
+</div>
+
+<script>
+const L = {otomo:"大友", film:"映画・アニメ", sf:"SF", tech:"テクノロジー", soc:"社会・事件", cul:"音楽・美術・本"};
+const DN = {1940:"原風景",1950:"テレビと原子力",1960:"五輪と地下",1970:"終末と万博",1980:"AKIRAとバブル",1990:"崩壊とインターネット",2000:"平面と端末",2010:"震災と予言",2020:"延期と再始動"};
+// [year, lane, title, note, flag] flag: "s"=本人明言, "o"=大友の仕事, ""=同時代
+const EV = [
+[1969,"film","フェリーニ『サテリコン』","所蔵リストにある。フェリーニは『8½』『道』『ローマ』『カサノバ』など多数所蔵。","s"],
+[1969,"film","松本俊夫『薔薇の葬列』","『松本俊夫全劇映画 DVD-BOX』を所蔵。新宿のアングラを撮った映画。","s"],
+[1970,"cul","浅川マキ『浅川マキの世界』","『BRUTUS』のプレイリストに挙げた。新宿の地下のブルース。","s"],
+[1971,"film","ペキンパー『わらの犬』","所蔵リスト。ペキンパーは『ワイルドバンチ』『ガルシアの首』『戦争のはらわた』と並ぶ。","s"],
+[1971,"film","フリードキン『フレンチ・コネクション』","フリードキン作品を多数所蔵。手持ちカメラの追跡、汚れた都市。","s"],
+[1972,"film","フェリーニ『ローマ』","所蔵リスト。都市の記憶を断片で積む映画。『AKIRA』のネオ東京の対極にある「古い都市」の描き方。","s"],
+[1972,"cul","マイルス・デイヴィス『On the Corner』","短編『ROUND ABOUT MIDNIGHT』の下敷きとして挙げた。","s"],
+[1973,"cul","ウェザー・リポート「Boogie Woogie Waltz」","同名短編の題。","s"],
+[1973,"film","フリードキン『エクソシスト』","所蔵リスト。","s"],
+[1973,"film","ちばてつや『のたり松太郎』を『ビッグコミック』で読む","吉祥寺のそば屋で見つけ、「歩き方のスピードがちょうど同じ」と随分勉強した。『童夢』の頃の話（MANTANWEB）。","s"],
+[1974,"film","ペキンパー『ガルシアの首』","所蔵リスト。","s"],
+[1975,"film","キューブリック『バリー・リンドン』","レーザーディスク所蔵。『突撃』『時計じかけのオレンジ』も。","s"],
+[1975,"film","パゾリーニ『ソドムの市』","所蔵リスト。『王女メディア』『アポロンの地獄』と並ぶ。","s"],
+[1975,"sf","メビウス『アルザック』","『メタル・ユルラン』創刊号から。台詞のない翼竜の騎士。大友が「こんな風に絵を描けばいいんだな」と語ったメビウスの代表作。","s"],
+[1975,"sf","半村良『妖星伝』","本棚にあった。『石の血脈』に続く伝奇SF。","s"],
+[1976,"sf","いしいひさいち『バイトくん』","本人が挙げた同世代の漫画。ニューウェーブの笑いの側。","s"],
+[1977,"film","フリードキン『恐怖の報酬』","所蔵リスト。","s"],
+[1977,"film","ペキンパー『戦争のはらわた』","所蔵リスト。","s"],
+[1979,"sf","シド・ミード『SENTINEL』","アートブックを参照したと2019年のCINRA対談で語る。『ブレードランナー』『トロン』の前にミードの画集があった。","s"],
+[1979,"sf","平井和正『幻魔大戦』（角川文庫）","本棚にあり、1983年の映画版でキャラクターデザインを担当する。","s"],
+[1980,"otomo","『スターログ』キューブリック特集に寄稿","『2001年宇宙の旅』とディズニー（『ファンタジア』『白雪姫』『101匹わんちゃん』）を挙げた。","o"],
+[1981,"sf","いしいひさいち『ドーナツブックス』","本人が挙げた。","s"],
+[1983,"otomo","『童夢』が日本SF大賞（第4回）","漫画として初。SF界が最初に大友を制度に載せた。","o"],
+[1988,"cul","Yello「The Race」","『AKIRA』作画中のBGM。森本晃司にダビングしてもらったと『Akira club』で語る。","s"],
+[1945,"soc","広島・長崎、敗戦","核による都市の消滅。『AKIRA』冒頭の爆心地と、ネオ東京の前提になる最初の層。",""],
+[1945,"tech","ENIAC完成（米）","電子計算機の始まり。大友の生涯はコンピュータの生涯とほぼ重なる。",""],
+[1946,"soc","日本国憲法公布","戦後体制の始まり。",""],
+[1947,"tech","トランジスタ発明（ベル研究所）","電子機器の小型化の起点。のちのウォークマンとファミコンへ。",""],
+[1949,"sf","オーウェル『1984』","監視社会のSF。『AKIRA』の軍と政府の描写の遠い前提。",""],
+[1949,"soc","湯川秀樹、日本人初のノーベル賞","戦後日本の「科学」への希望。原子力の明るい顔。",""],
+[1950,"soc","朝鮮戦争、特需景気","復興の資金がここから入る。",""],
+[1951,"film","黒澤明『羅生門』ヴェネチア金獅子賞","日本映画が海外の制度に載った最初。大友の海外経路の遠い先例。",""],
+[1952,"sf","手塚治虫『鉄腕アトム』連載開始","原子力で動く少年ロボット。核の明るい顔が漫画になった。大友が尊敬する三人の一人。","s"],
+[1953,"tech","NHKテレビ放送開始","茶の間に映像が入る。大友は1954年生まれで、テレビとともに育った最初の世代。",""],
+[1953,"tech","別府湾の堆積物に人為痕跡の急増（人新世の補助境界）","地層の中の1953年。翌年に大友が生まれる。",""],
+[1953,"sf","ブラッドベリ『華氏451度』","焚書と管理社会。",""],
+[1954,"soc","第五福竜丸被曝（ビキニ水爆実験）","核の恐怖が日本の日常に戻ってきた。",""],
+[1954,"film","『ゴジラ』","水爆実験で目覚めた怪獣が東京を焼く。戦後「東京が壊れる図像」の起点。",""],
+[1954,"film","黒澤明『七人の侍』","大友が「血肉となっている7本」に挙げた。","s"],
+[1954,"otomo","大友克洋、宮城県登米郡に生まれる","テレビ、原子力、ゴジラと同じ年。","o"],
+[1956,"sf","横山光輝『鉄人28号』","戦時中の秘密兵器を少年が操る。『AKIRA』の固有名の出所。","s"],
+[1957,"tech","スプートニク1号（ソ連）","宇宙開発競争の始まり。SFが現実に追いつかれ始める。",""],
+[1958,"tech","東京タワー完成","戦後東京の垂直の象徴。『AKIRA』のネオ東京はこれを超高層で埋める。",""],
+[1959,"sf","『SFマガジン』創刊（早川書房）","日本SFの制度化。星新一、小松左京、筒井康隆がここから出る。",""],
+[1959,"tech","集積回路（IC）発明","半導体の時代へ。",""],
+[1960,"soc","安保闘争","戦後最大の大衆運動。『AKIRA』の反政府ゲリラの遠い記憶。",""],
+[1961,"tech","ガガーリン、人類初の有人宇宙飛行","",""],
+[1961,"film","日本アート・シアター・ギルド（ATG）設立","芸術映画の配給と上映の場。大友の血肉の7本に『心中天網島』（ATG、1969）。","s"],
+[1962,"soc","キューバ危機","核戦争が最も近づいた年。",""],
+[1963,"sf","『鉄腕アトム』TVアニメ放送開始","国産初の30分連続アニメ。大友は『芸術新潮』でアトムと鉄人のTVアニメを挙げた。","s"],
+[1963,"soc","ケネディ暗殺、日米間初のテレビ衛星中継","世界の事件が同時に見える時代の始まり。",""],
+[1963,"sf","日本SF作家クラブ結成","のちに大友の『童夢』に日本SF大賞を与える団体。",""],
+[1963,"film","今村昌平『にっぽん昆虫記』","血肉の7本。初期漫画『心中-74'秋』で『赤い殺意』とともに言及。","s"],
+[1964,"soc","東京オリンピック、東海道新幹線、首都高","都市を上書きする祝祭。『AKIRA』の2020年五輪はこの反復。",""],
+[1964,"sf","『ガロ』創刊","作者性のある漫画の場。ポンピドゥー2024はここを漫画史の起点に置いた。",""],
+[1965,"film","ゴダール『アルファヴィル』","既存のパリを未来都市として撮った。都市をそのまま未来にする方法。",""],
+[1965,"sf","フランク・ハーバート『デューン』","生態系と宗教のSF。『ナウシカ』の腐海の遠い先例。",""],
+[1966,"sf","『ウルトラQ』『ウルトラマン』","怪獣がテレビで毎週来る。破壊の日常化。",""],
+[1966,"film","草月アートセンター「アンダーグラウンド・シネマ 日本・アメリカ」","米国の実験映画を通して「アングラ」が東京に入った年。",""],
+[1966,"soc","ビートルズ来日、中国文化大革命","",""],
+[1967,"film","『俺たちに明日はない』","アメリカン・ニューシネマの開幕。大友が挙げた。","s"],
+[1967,"film","パゾリーニ『アポロンの地獄』","血肉の7本。","s"],
+[1968,"film","キューブリック『2001年宇宙の旅』","大友が繰り返し挙げる作家。1980年『スターログ』に寄稿。","s"],
+[1968,"soc","全共闘、パリ五月革命、プラハの春","世界同時の若者の反乱。",""],
+[1968,"sf","ディック『アンドロイドは電気羊の夢を見るか？』","『ブレードランナー』の原作。",""],
+[1968,"tech","霞が関ビル完成（日本初の超高層）","高さ制限の撤廃。東京が縦に伸び始める。",""],
+[1968,"film","今村昌平『神々の深き欲望』","南島の神話と近代の侵入。今村の土着志向の頂点。",""],
+[1969,"tech","アポロ11号、月面着陸","テレビで見た宇宙。",""],
+[1969,"tech","ARPANET接続開始","インターネットの原型。",""],
+[1969,"film","『イージー・ライダー』","2013年「爆音大友克洋」で本人が選んだ一本。","s"],
+[1969,"film","ペキンパー『ワイルドバンチ』","短編「サン・バーグズヒルの思い出」でオマージュ。","s"],
+[1969,"film","篠田正浩『心中天網島』（ATG）","血肉の7本。","s"],
+[1969,"sf","ヴォネガット『スローターハウス5』","大友の10冊。","s"],
+[1969,"sf","山下洋輔トリオ『Dancing古事記』","フリージャズが記紀神話を題にした。",""],
+[1970,"soc","大阪万博","未来都市のイメージの大衆化。人類の進歩と調和。同年に万博破壊共闘派。",""],
+[1970,"tech","万博でワイヤレステレホン、動く歩道、太陽の塔","未来の技術が会場で体験できた。",""],
+[1970,"soc","三島由紀夫事件、よど号ハイジャック","",""],
+[1970,"film","アーサー・ペン『小さな巨人』","血肉の7本。","s"],
+[1971,"tech","Intel 4004（世界初のマイクロプロセッサ）","コンピュータが一枚のチップになる。",""],
+[1971,"soc","ニクソン・ショック（金ドル交換停止）","",""],
+[1971,"film","キューブリック『時計じかけのオレンジ』","所有するが、影響の明言は未確認。",""],
+[1971,"film","ルーカス『THX 1138』","管理社会SF。白い地下都市。",""],
+[1971,"sf","半村良『石の血脈』","大友の10冊の筆頭。伝奇SF。","s"],
+[1971,"film","土本典昭『水俣 患者さんとその世界』","汚染が土地と身体に堆積する記録。",""],
+[1972,"soc","あさま山荘事件、沖縄返還、日中国交正常化","学生運動の終わり。",""],
+[1972,"tech","アタリ『ポン』、高島平団地入居開始","ビデオゲームの商業化と、『童夢』の団地のモデル。",""],
+[1972,"film","タルコフスキー『惑星ソラリス』","記憶が物質になる惑星。日本公開は1977年、岩波ホール。",""],
+[1972,"tech","中銀カプセルタワー完成","メタボリズムの実作。2022年解体。",""],
+[1973,"soc","第一次オイルショック","高度成長の終わり。トイレットペーパー騒動。",""],
+[1973,"sf","小松左京『日本沈没』、五島勉『ノストラダムスの大予言』","終末ブームの口火。『AKIRA』の「予言」はこの空気の中で読まれる。",""],
+[1973,"otomo","『銃声』で商業デビュー（『漫画アクション』）","メリメ原作。村野守美の現場で漫画を学んだ直後。","o"],
+[1973,"film","『ソイレント・グリーン』","人口過剰と食糧危機のSF。",""],
+[1973,"film","フェリーニ『アマルコルド』","血肉の7本。","s"],
+[1974,"soc","ユリ・ゲラー来日、超能力ブーム","スプーン曲げが茶の間に。『童夢』『AKIRA』の超能力のリアリティ。",""],
+[1974,"sf","『宇宙戦艦ヤマト』放送開始","戦艦大和を宇宙船にする。戦争の記憶とSFの合流。",""],
+[1974,"film","岩波ホール「エキプ・ド・シネマ」開始（『大樹のうた』）","欧米以外の名作を上映する運動。ミニシアターの先駆け。",""],
+[1974,"film","寺山修司『田園に死す』","恐山、村の記憶。",""],
+[1975,"tech","Altair 8800、マイクロソフト設立","パーソナル・コンピュータの始まり。",""],
+[1975,"sf","筒井康隆『七瀬ふたたび』","超能力者の少女が追われる。『童夢』『AKIRA』の子どもたちの文学側の先例。",""],
+[1975,"film","黒澤明『デルス・ウザーラ』","シベリアの森の猟師。",""],
+[1975,"sf","『メタル・ユルラン』創刊（メビウス）","大友が「こんな風に絵を描けばいいんだな」と語った。","s"],
+[1976,"tech","Apple設立","",""],
+[1976,"film","スコセッシ『タクシードライバー』","1979年の短編『RUN』でデ・ニーロを引用。","s"],
+[1976,"soc","ロッキード事件","",""],
+[1976,"sf","諸星大二郎『暗黒神話』","記紀神話と古墳を掘る漫画。",""],
+[1977,"film","『スター・ウォーズ』","大友が対談で挙げた。使い込まれた未来の美術。","s"],
+[1977,"film","『未知との遭遇』","",""],
+[1977,"tech","Apple II発売","家庭にコンピュータが入り始める。",""],
+[1977,"sf","スタジオぬえ『宇宙の戦士』パワードスーツ","メカデザインの影響源として本人が明言。","s"],
+[1978,"tech","スペースインベーダー","喫茶店にゲーム機が並ぶ。",""],
+[1978,"film","『ピロスマニ』（岩波ホール）","ジョージアの民衆画家。",""],
+[1978,"sf","宮崎駿『未来少年コナン』","宮崎の実質的な初監督作。戦争後の世界。",""],
+[1979,"tech","ソニー・ウォークマン発売","音楽が都市を歩く。",""],
+[1979,"tech","スリーマイル島原発事故（米）","原子力の明るい顔が曇る。",""],
+[1979,"sf","『機動戦士ガンダム』放送開始","ロボットが兵器になる。リアルロボットの始まり。",""],
+[1979,"film","『エイリアン』、タルコフスキー『ストーカー』","汚れた宇宙船と、汚染された聖域。",""],
+[1979,"film","アンゲロプロス『旅芸人の記録』（岩波ホール）","歴史を一座の移動で積層させる。",""],
+[1979,"otomo","『ショート・ピース』『ハイウェイスター』刊行、『Fire-ball』","短編期の集成とSFへの転回。","o"],
+[1980,"otomo","『童夢』連載開始","団地の超能力戦。背景が主役になった最初の作品。","o"],
+[1980,"sf","鳥山明『Dr.スランプ』","大友の影響を公言する作家の代表。",""],
+[1980,"film","ヴィスコンティ『ルードヴィヒ』（岩波ホール）","装飾と密度の映画。",""],
+[1980,"tech","パックマン","",""],
+[1980,"soc","ジョン・レノン射殺","",""],
+[1981,"tech","IBM PC発売、スペースシャトル初飛行","",""],
+[1981,"film","『マッドマックス2』","荒廃世界とバイク。金田のバイクと並べて語られる。",""],
+[1981,"otomo","『気分はもう戦争』（矢作俊彦原作）","中ソ国境の戦場へ向かう若者たち。","o"],
+[1982,"film","『ブレードランナー』","シド・ミードの都市。大友が対談で語った。","s"],
+[1982,"film","『トロン』","このバイクも手本にしたと本人が語る。","s"],
+[1982,"film","『E.T.』","",""],
+[1982,"tech","CD発売、NEC PC-9801","デジタル音楽と国産PCの標準機。",""],
+[1982,"sf","『超時空要塞マクロス』","スタジオぬえの設定。",""],
+[1982,"otomo","『AKIRA』連載開始（『週刊ヤングマガジン』12月）","第三次世界大戦後の2019年、ネオ東京。","o"],
+[1982,"otomo","自主映画『じゆうを我等に』","約500万円、16mm、1時間。映画制作の過程を自分で学んだ。","o"],
+[1982,"film","小川紳介『ニッポン国古屋敷村』","村の土を掘って記録する。1986年『1000年刻みの日時計』へ。",""],
+[1983,"tech","ファミリーコンピュータ発売","ゲームが家庭の標準装備になる。",""],
+[1983,"tech","インターネット（TCP/IP）移行","",""],
+[1983,"soc","東京ディズニーランド開園","",""],
+[1983,"otomo","『幻魔大戦』キャラクターデザイン","りんたろう監督、角川映画。アニメへの入口。『童夢』が日本SF大賞。","o"],
+[1983,"film","ヘルツォーク『アギーレ 神の怒り』（岩波ホール）","",""],
+[1984,"tech","Macintosh発売","GUIの大衆化。",""],
+[1984,"sf","ギブスン『ニューロマンサー』","サイバーパンクの命名。『AKIRA』と同時に別の場所で。",""],
+[1984,"film","『風の谷のナウシカ』、『ターミネーター』","漫画家が自作を監督する先例と、機械の反乱。",""],
+[1984,"film","押井守『うる星やつら2 ビューティフル・ドリーマー』","閉じた街と夢。押井が作家になった作品。",""],
+[1984,"soc","グリコ・森永事件","",""],
+[1985,"tech","つくば科学万博","未来技術の博覧会。ロボットとハイビジョン。",""],
+[1985,"tech","Windows 1.0、スーパーマリオブラザーズ","",""],
+[1985,"soc","プラザ合意、日航123便墜落","円高とバブルの始まり。",""],
+[1985,"film","ギリアム『未来世紀ブラジル』","官僚制のディストピア。",""],
+[1985,"sf","士郎正宗『アップルシード』","大友的な密度を情報と機械へ。",""],
+[1985,"film","柳町光男『火まつり』","熊野の山と神。『もののけ姫』の12年前。",""],
+[1986,"soc","チェルノブイリ原発事故、チャレンジャー爆発","技術の失敗が同時代の映像になった。",""],
+[1986,"film","『天空の城ラピュタ』、『エイリアン2』","",""],
+[1986,"tech","ドラゴンクエスト","",""],
+[1986,"soc","路上観察学会結成（赤瀬川原平・藤森照信）","都市の無用物を採集する。",""],
+[1987,"film","『ロボコップ』","企業が警察を所有する未来。",""],
+[1987,"film","ガイナックス『王立宇宙軍 オネアミスの翼』","架空の国の宇宙開発。若いアニメ作家の作家性。",""],
+[1987,"otomo","『迷宮物語』「工事中止命令」でアニメ監督デビュー","マッドハウス。","o"],
+[1987,"soc","国鉄分割民営化、ブラックマンデー","",""],
+[1988,"otomo","映画『AKIRA』公開（7月）","製作委員会方式、約10億円。327色を使い一部にコンピュータを使ったとされる（要確認）。音楽は芸能山城組。Epic版の英訳も同年。","o"],
+[1988,"film","『となりのトトロ』『火垂るの墓』","ジブリの二本立て。",""],
+[1988,"sf","ガイナックス『トップをねらえ!』","",""],
+[1988,"soc","青函トンネル、瀬戸大橋開通","列島が一本につながった年。",""],
+[1988,"film","松本俊夫『ドグラ・マグラ』","大友が「良い」と語った映画化。","s"],
+[1988,"film","『芙蓉鎮』『八月の鯨』（岩波ホール）","文革の記憶と老いの記憶。",""],
+[1989,"soc","昭和の終わり、天安門事件、ベルリンの壁崩壊","冷戦の終点。『AKIRA』はこの年をまたいで完結する。",""],
+[1989,"tech","ゲームボーイ、WWWの提案（バーナーズ＝リー）","携帯ゲームと、ウェブの設計図。",""],
+[1989,"sf","士郎正宗『攻殻機動隊』連載開始","電脳化された身体。",""],
+[1989,"film","塚本晋也『鉄男』","肉体と金属。『AKIRA』と並ぶ和製サイバーパンク。",""],
+[1990,"otomo","『AKIRA』連載完結（全6巻、1993年）","以後、長編漫画からほぼ離れる。","o"],
+[1990,"soc","株価暴落、バブル崩壊","上書きが止まる。",""],
+[1990,"film","『トータル・リコール』","ディック原作。記憶の捏造。",""],
+[1990,"sf","Glénat仏語版『AKIRA』","BD圏が大友を迎える。",""],
+[1991,"soc","湾岸戦争（CNN生中継）、ソ連崩壊","戦争がテレビのライブになった。",""],
+[1991,"otomo","『老人Z』","原作・脚本・メカデザイン。高齢化と介護ロボット。","o"],
+[1991,"film","『ターミネーター2』","CGの液体金属。デジタルが映像の主役になる。",""],
+[1991,"soc","東京都庁、新宿に移転","丹下健三設計。バブル末期の記念碑。",""],
+[1992,"sf","スティーヴンスン『スノウ・クラッシュ』","メタバースという言葉の出所。",""],
+[1992,"film","『紅の豚』","",""],
+[1993,"tech","Mosaicブラウザ","ウェブが画像つきで見られるようになる。",""],
+[1993,"film","『ジュラシック・パーク』","CGの恐竜。",""],
+[1994,"tech","PlayStation、セガサターン","3Dゲームの時代。",""],
+[1994,"soc","関西国際空港開港","海を埋めた空港。",""],
+[1995,"soc","阪神・淡路大震災、地下鉄サリン事件","描かれてきた破壊と終末が現実に。超能力ブームの末路。",""],
+[1995,"tech","Windows 95、インターネット元年","",""],
+[1995,"sf","『新世紀エヴァンゲリオン』","第3新東京市。『AKIRA』の構図を90年代に。",""],
+[1995,"film","押井守『攻殻機動隊』","『AKIRA』が開いた海外の回路で評価された。",""],
+[1995,"otomo","『MEMORIES』","「大砲の街」を監督。ワンカット風の長回し。","o"],
+[1996,"tech","たまごっち、ポケットモンスター","",""],
+[1996,"film","『インデペンデンス・デイ』","都市破壊のハリウッド版。",""],
+[1997,"tech","Deep Blueがカスパロフに勝利、トヨタ・プリウス","",""],
+[1997,"film","『もののけ姫』、『タイタニック』","宮崎が網野善彦・梅原猛と対談し照葉樹林文化論を語った年。",""],
+[1997,"soc","山一證券破綻、消費税5%","",""],
+[1998,"tech","Google設立、iMac","",""],
+[1998,"sf","『serial experiments lain』","ネットと現実の境界が溶ける。",""],
+[1999,"tech","iモード開始、2000年問題","携帯電話でインターネット。",""],
+[1999,"soc","東海村JCO臨界事故","国内で初の臨界事故。原子力の明るい顔が再び曇る。",""],
+[1999,"film","『マトリックス』","ウォシャウスキーが『AKIRA』参照を公言。",""],
+[2000,"soc","村上隆「スーパーフラット」","漫画・アニメを平面性の系譜として美術に置いた。『地層』が対にする相手。",""],
+[2000,"tech","PlayStation 2","",""],
+[2000,"film","『バトル・ロワイアル』","",""],
+[2001,"soc","9.11同時多発テロ","テレビで見た都市の崩壊。",""],
+[2001,"tech","iPod、Wikipedia","",""],
+[2001,"film","『千と千尋の神隠し』、『A.I.』","",""],
+[2001,"sf","東浩紀『動物化するポストモダン』","データベース消費。作者と物語の解体。",""],
+[2002,"film","『マイノリティ・リポート』","未来のUI。",""],
+[2002,"otomo","アイズナー賞殿堂入り","","o"],
+[2003,"soc","イラク戦争、六本木ヒルズ開業","",""],
+[2004,"otomo","『スチームボーイ』","製作費約24億円とされる、約10年がかりの長編。ヴィクトリア朝の技術史。","o"],
+[2004,"tech","Facebook、ニンテンドーDS","",""],
+[2004,"film","『イノセンス』『ハウルの動く城』","",""],
+[2005,"soc","愛知万博、「リトルボーイ」展（NY）","万博と、スーパーフラットの戦後論。",""],
+[2005,"tech","YouTube","",""],
+[2006,"otomo","実写『蟲師』","","o"],
+[2006,"film","『時をかける少女』『パプリカ』『トゥモロー・ワールド』","",""],
+[2006,"tech","Twitter","",""],
+[2007,"tech","iPhone発売","端末が身体の一部になる。",""],
+[2007,"sf","伊藤計劃『虐殺器官』","9.11以後の日本SF。",""],
+[2007,"film","『電脳コイル』、カニエ・ウェスト「Stronger」MV","拡張現実の子どもたちと、『AKIRA』の再現。",""],
+[2008,"soc","リーマン・ショック、秋葉原無差別殺傷","",""],
+[2008,"sf","伊藤計劃『ハーモニー』","健康が強制される社会。",""],
+[2008,"film","『WALL-E』『ダークナイト』『崖の上のポニョ』","",""],
+[2009,"film","『アバター』『サマーウォーズ』","3Dと仮想世界。",""],
+[2009,"tech","ビットコイン","",""],
+[2010,"tech","iPad、Instagram","",""],
+[2010,"film","『インセプション』","",""],
+[2011,"soc","東日本大震災、福島第一原発事故","瓦礫の都市が現実に。『AKIRA』の読み直しが起きる。",""],
+[2011,"tech","Siri","",""],
+[2012,"tech","AlexNet（深層学習の転換点）","",""],
+[2012,"otomo","「大友克洋GENGA展」（3331 Arts Chiyoda）","原画約3000点。『芸術新潮』『BRUTUS』特集で本人が影響源を語る。","o"],
+[2012,"film","『クロニクル』","監督が『AKIRA』参照を公言。",""],
+[2012,"soc","東京スカイツリー開業","東京タワーの次の垂直。",""],
+[2013,"otomo","『SHORT PEACE』「火要鎮」、紫綬褒章","テレビで「AKIRA2はやらない」と発言。爆音映画祭で『イージー・ライダー』を選ぶ。","o"],
+[2013,"film","『風立ちぬ』『her』『パシフィック・リム』","技術者の夢、AIとの恋、怪獣へのオマージュ。",""],
+[2013,"soc","2020年東京オリンピック決定","『AKIRA』の「予言」が話題に。",""],
+[2014,"film","『エクス・マキナ』『インターステラー』","",""],
+[2014,"otomo","フランス芸術文化勲章オフィシエ","","o"],
+[2015,"otomo","アングレーム国際漫画祭 最優秀賞","日本人初。翌年に特集展。","o"],
+[2015,"film","『マッドマックス 怒りのデス・ロード』","",""],
+[2015,"soc","国立新美術館「ニッポンのマンガ・アニメ・ゲーム」展","漫画が国立の美術館に入った。",""],
+[2016,"film","『シン・ゴジラ』『君の名は。』『メッセージ』","3.11以後のゴジラ。",""],
+[2016,"tech","Pokémon GO、AlphaGo","",""],
+[2017,"film","『ブレードランナー 2049』","",""],
+[2017,"soc","渋谷PARCO「AKIRA ART WALL」、Supreme×AKIRA","再開発の仮囲いとストリートウェアに『AKIRA』が流通。",""],
+[2018,"film","『レディ・プレイヤー1』","金田のバイクが登場。ハリウッドがAKIRAを引用する側に。",""],
+[2019,"otomo","『AKIRA』新アニメ化・『ORBITAL ERA』発表","『AKIRA』の舞台の年。4Kリマスター。","o"],
+[2019,"soc","令和改元、大英博物館「マンガ」展","",""],
+[2019,"film","『天気の子』","",""],
+[2020,"soc","COVID-19、東京五輪延期","『AKIRA』の「中止だ中止」が現実に。",""],
+[2020,"film","『TENET』","",""],
+[2021,"soc","東京オリンピック無観客開催","",""],
+[2021,"film","『DUNE』、『イノセンツ』","『イノセンツ』は『童夢』からの着想を公言。",""],
+[2022,"tech","ChatGPT公開","",""],
+[2022,"otomo","『大友克洋全集』刊行開始","第1回配本は『童夢』と『AKIRA』絵コンテ集。","o"],
+[2022,"soc","岩波ホール閉館、中銀カプセルタワー解体","大友が育った東京の二つの場所が同じ年に消えた。",""],
+[2022,"film","『すずめの戸締まり』","震災の記憶と扉。",""],
+[2023,"film","『君たちはどう生きるか』『オッペンハイマー』","宮崎の最新作と、原爆の起源。",""],
+[2023,"otomo","AKIRAセル画展","","o"],
+[2024,"soc","能登半島地震、ポンピドゥー「Bande dessinée 1964-2024」","ポンピドゥーは『AKIRA』原画を出せず、アニメを上映した。",""],
+[2025,"otomo","NHK『浦沢直樹の漫勉neo』出演、『MEMORIES』30周年4K","","o"],
+[2025,"soc","森美術館「東京アンダーグラウンド 1960-1970年代」","エフェメラで地下の文化を再構成した調査展。",""],
+[2026,"otomo","新スタジオOVAL GEAR設立、「午前十時の映画祭」で『AKIRA』が動員1位、『老人Z』4K劇場公開","新作アニメーションが進行中。","o"]
+];
+EV.sort((a,b)=>a[0]-b[0]);
+const root = document.getElementById('timeline');
+let cur=null, list=null;
+EV.forEach(e=>{
+  const [yr,lane,t,n,f] = e;
+  const dec = Math.floor(yr/10)*10;
+  if(dec!==cur){ cur=dec; const s=document.createElement('section'); s.className='decade'; s.innerHTML='<h2>'+dec+'年代<small>'+(DN[dec]||'')+'</small></h2><ul class="tl"></ul>'; root.appendChild(s); list=s.querySelector('.tl'); }
+  const li=document.createElement('li'); li.className='ev '+lane; li.dataset.lane=lane; li.dataset.f=f;
+  li.style.setProperty('--lc','var(--'+(lane==='otomo'?'spine':lane)+')');
+  li.innerHTML='<div class="yr">'+yr+'</div><span class="node"></span><div class="card"><div class="t">'+t+'</div>'+(n?'<div class="n">'+n+'</div>':'')+'<div class="m">'+L[lane]+(f==='s'?'<span class="st">本人明言</span>':'')+'</div></div>';
+  list.appendChild(li);
+});
+const chips=document.querySelectorAll('.chip[data-l]'); const only=document.getElementById('onlyStated');
+function apply(){
+  const act=new Set([...chips].filter(c=>c.getAttribute('aria-pressed')==='true').map(c=>c.dataset.l));
+  const so=only.getAttribute('aria-pressed')==='true';
+  document.querySelectorAll('.ev').forEach(ev=>{ ev.classList.toggle('hide', !(act.has(ev.dataset.lane) && (!so || ev.dataset.f==='s' || ev.dataset.f==='o'))); });
+  document.querySelectorAll('.decade').forEach(d=>{ d.style.display = d.querySelector('.ev:not(.hide)')?'':'none'; });
+}
+chips.forEach(c=>c.addEventListener('click',()=>{ c.setAttribute('aria-pressed', c.getAttribute('aria-pressed')==='true'?'false':'true'); apply(); }));
+only.addEventListener('click',()=>{ only.setAttribute('aria-pressed', only.getAttribute('aria-pressed')==='true'?'false':'true'); apply(); });
+</script>
+</body>
+</html>

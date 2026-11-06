@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>大友克洋を軸にした三つの文化史 1830–2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E9EAE6; --paper:#F4F4F1; --ink:#15181B; --ink2:#4E5358; --ink3:#8A9096; --rule:#C9CCC6;
+  --spine:#B5121B; --spine-soft:#F6DDDE;
+  --manga:#2F6F8F; --film:#6B5B95; --lit:#8B4A6B; --sf:#3E7D5A; --society:#8A7A4E;
+  --manga-soft:#DCE8EF; --film-soft:#E6E1F0; --lit-soft:#EFDFE7; --sf-soft:#DDEAE2; --society-soft:#EDE8D8;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#1B1E21; --paper:#24282C; --ink:#E6E4DD; --ink2:#B4B2AA; --ink3:#7E837F; --rule:#3A3F43;
+  --spine:#E5424B; --spine-soft:#3A1F22;
+  --manga:#7FB3CE; --film:#B0A4D6; --lit:#D28AB0; --sf:#8CC3A2; --society:#C8B57E;
+  --manga-soft:#223844; --film-soft:#2F2A40; --lit-soft:#3C2733; --sf-soft:#223A2D; --society-soft:#3A3524; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#1B1E21; --paper:#24282C; --ink:#E6E4DD; --ink2:#B4B2AA; --ink3:#7E837F; --rule:#3A3F43;
+  --spine:#E5424B; --spine-soft:#3A1F22;
+  --manga:#7FB3CE; --film:#B0A4D6; --lit:#D28AB0; --sf:#8CC3A2; --society:#C8B57E;
+  --manga-soft:#223844; --film-soft:#2F2A40; --lit-soft:#3C2733; --sf-soft:#223A2D; --society-soft:#3A3524; color-scheme:dark;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px}
+h1,h2,h3{font-family:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;font-weight:700;margin:0;letter-spacing:.01em}
+header{padding:56px 0 24px;border-bottom:1px solid var(--rule)}
+.range{font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:13px;color:var(--ink3);letter-spacing:.12em;margin-bottom:10px}
+h1{font-size:30px;line-height:1.3}
+.lead{margin:18px 0 0;color:var(--ink2);max-width:36em}
+.axes{margin:22px 0 0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.axes li{padding:14px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:2.4em 1fr;gap:8px}
+.axes li b{font-family:"Shippori Mincho B1",serif;font-weight:700;color:var(--spine);font-size:18px;line-height:1.5}
+.axes li span{color:var(--ink2)}
+.axes li span strong{color:var(--ink);font-weight:500}
+.sources{margin-top:18px;font-size:13px;color:var(--ink3);line-height:1.7}
+
+.controls{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0 10px;border-bottom:1px solid var(--rule);margin-bottom:8px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.tabs{display:flex;gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:8px}
+.tab{flex:1;appearance:none;border:0;background:var(--paper);color:var(--ink2);font:inherit;font-size:13.5px;padding:8px 4px;cursor:pointer;font-family:"Shippori Mincho B1",serif;font-weight:500;border-right:1px solid var(--rule)}
+.tab:last-child{border-right:0}
+.tab[aria-pressed="true"]{background:var(--spine);color:#fff}
+.tab:focus-visible{outline:2px solid var(--spine);outline-offset:-3px}
+.axisdesc{font-size:13px;color:var(--ink2);margin:0 0 8px;line-height:1.6;min-height:1.6em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{appearance:none;border:1px solid var(--rule);background:var(--paper);color:var(--ink2);border-radius:999px;padding:4px 11px;font:inherit;font-size:12.5px;line-height:1.4;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--c);display:inline-block;flex:none}
+.chip[aria-pressed="true"]{border-color:var(--c);color:var(--ink);background:var(--soft)}
+.chip:focus-visible{outline:2px solid var(--spine);outline-offset:2px}
+.chip.ev{--c:var(--ink2);--soft:var(--rule)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:12px;color:var(--ink3)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend svg{width:18px;height:12px}
+
+.decade{position:relative;padding:34px 0 4px}
+.decade h2{font-size:15px;font-weight:500;color:var(--ink3);letter-spacing:.14em;padding-left:68px;margin-bottom:6px;font-family:"Shippori Mincho B1",serif}
+.tl{position:relative;margin:0;padding:0;list-style:none}
+.tl::before{content:"";position:absolute;left:56px;top:0;bottom:0;width:2px;background:var(--spine);opacity:.9}
+.ev{position:relative;display:grid;grid-template-columns:48px 1fr;gap:0 20px;padding:9px 0}
+.ev .yr{font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:13px;color:var(--ink3);text-align:right;padding-top:6px;letter-spacing:.04em}
+.ev .node{position:absolute;left:51px;top:17px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--lc)}
+.ev.otomo .node{background:var(--spine);border-color:var(--spine);width:14px;height:14px;left:50px;top:16px}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:10px 13px 10px 14px;position:relative;cursor:pointer}
+.card::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;background:var(--lc);border-radius:0}
+.ev.otomo .card{border-color:var(--spine);background:var(--spine-soft)}
+.ev.otomo .card::before{display:none}
+.card .t{font-weight:500;font-size:15px;line-height:1.5;display:flex;gap:8px;align-items:flex-start}
+.ev.otomo .card .t{font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:16px}
+.dir{flex:none;margin-top:5px;width:18px;height:12px}
+.dir path{fill:none;stroke:var(--lc);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dir.dashed path{stroke-dasharray:2.5 2}
+.meta{display:flex;gap:6px;align-items:center;margin-top:5px;flex-wrap:wrap}
+.lane{font-size:11px;color:var(--lc);letter-spacing:.06em;margin-right:2px}
+.ev.otomo .lane{color:var(--spine)}
+.badge{font-size:11px;padding:1px 7px;border-radius:4px;border:1px solid var(--rule);color:var(--ink2);background:var(--bg)}
+.badge.stated{border-color:var(--lc);color:var(--lc)}
+.ax{font-size:11px;font-family:"Shippori Mincho B1",serif;font-weight:700;color:var(--ink3);letter-spacing:.1em}
+.card .body{display:none;margin-top:8px;border-top:1px solid var(--rule);padding-top:8px}
+.card.open .body{display:block}
+.card .n{color:var(--ink);font-size:14px;line-height:1.75}
+.card .cx{color:var(--ink2);font-size:13.5px;line-height:1.75;margin-top:6px;padding-left:10px;border-left:2px solid var(--rule)}
+.card .cx b{font-weight:500;color:var(--ink3);font-size:12px;display:block;margin-bottom:1px;letter-spacing:.06em}
+.ev.hide{display:none}
+.card:focus-visible{outline:2px solid var(--spine);outline-offset:2px}
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);color:var(--ink3);font-size:12px;line-height:1.7}
+@media (min-width:600px){ h1{font-size:40px} .wrap{padding:0 28px 100px} .tab{font-size:15px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="range">1830 ― 2026</div>
+  <h1>大友克洋を軸にした<br>三つの文化史</h1>
+  <p class="lead">赤い軸が大友克洋本人の仕事。それを横切る三つの文化史を、軸ごとに切り替えて読めます。各カードには「大友との関係」と「周辺文脈」を分けて入れ、根拠の種類（本人が明言／批評上の系譜／並走／波及）を札で示しました。</p>
+  <ul class="axes">
+    <li><b>Ａ</b><span><strong>都市：上書きされる東京。</strong>震災→戦災→復興→五輪→再開発→震災→五輪。大友が繰り返し描く瓦礫は、東京の地層そのもの。展覧会の本線。</span></li>
+    <li><b>Ｂ</b><span><strong>線：写実と空間の技法史。</strong>絵巻から手塚、劇画、ちばてつやのテンポ、メビウス、ディズニーの観察を経て「大友以後」へ。そして海外で「作者」として正典化されるまで。</span></li>
+    <li><b>Ｃ</b><span><strong>地下：土着・猟奇・超能力。</strong>民俗学、探偵小説、伝奇SF、オカルトブーム、落語、今村昌平とATG。本人の読書と視聴の重心で、SFの下に敷かれた層。</span></li>
+  </ul>
+  <p class="sources">本人の明言は主に『BRUTUS特別編集 合本・大友克洋』、『芸術新潮』2012年4月号（中条省平）、BDfileのメビウス追悼インタビュー（2013）、MANTANWEB「ビッグに聞く」（2018）、CINRAの河村康輔との対談（2019）、『Akira club』（1995）から。</p>
+</header>
+
+<div class="controls">
+  <div class="tabs" id="tabs">
+    <button class="tab" data-ax="" aria-pressed="true">すべて</button>
+    <button class="tab" data-ax="A" aria-pressed="false">Ａ 都市</button>
+    <button class="tab" data-ax="B" aria-pressed="false">Ｂ 線</button>
+    <button class="tab" data-ax="C" aria-pressed="false">Ｃ 地下</button>
+  </div>
+  <p class="axisdesc" id="axisdesc">三つの軸をすべて重ねて表示しています。</p>
+  <div class="chips" id="chips">
+    <button class="chip" data-lane="otomo" aria-pressed="true" style="--c:var(--spine);--soft:var(--spine-soft)"><i></i>大友</button>
+    <button class="chip" data-lane="manga" aria-pressed="true" style="--c:var(--manga);--soft:var(--manga-soft)"><i></i>漫画</button>
+    <button class="chip" data-lane="film" aria-pressed="true" style="--c:var(--film);--soft:var(--film-soft)"><i></i>映画・アニメ</button>
+    <button class="chip" data-lane="lit" aria-pressed="true" style="--c:var(--lit);--soft:var(--lit-soft)"><i></i>文学・音楽・美術</button>
+    <button class="chip" data-lane="sf" aria-pressed="true" style="--c:var(--sf);--soft:var(--sf-soft)"><i></i>SF・海外</button>
+    <button class="chip" data-lane="society" aria-pressed="true" style="--c:var(--society);--soft:var(--society-soft)"><i></i>社会・都市・建築</button>
+    <button class="chip ev" id="onlyStated" aria-pressed="false">本人の明言だけ</button>
+  </div>
+  <div class="legend">
+    <span><svg viewBox="0 0 18 12"><path d="M2 2 L14 10 M14 4 L14 10 L8 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>本人が明言</span>
+    <span><svg viewBox="0 0 18 12"><path d="M2 2 L14 10 M14 4 L14 10 L8 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.5 2" stroke-linecap="round" stroke-linejoin="round"/></svg>批評の系譜</span>
+    <span><svg viewBox="0 0 18 12"><path d="M2 10 L14 2 M8 2 L14 2 L14 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>大友から波及</span>
+    <span><svg viewBox="0 0 18 12"><path d="M2 6 L16 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>並走</span>
+  </div>
+</div>
+
+<div id="timeline"></div>
+
+<p class="foot">「本人が明言」は、大友自身がインタビュー・アンケート・寄稿・所蔵リストで名を挙げたもの。「批評上の系譜」は本人発言が確認できず、批評や比較の中で語られてきたもの。『AKIRA』の題名が黒澤明に由来するという説は広く流布していますが、本人の一次発言は確認できていません。</p>
+</div>
+
+<script>
+const LANES = {otomo:"大友", manga:"漫画", film:"映画・アニメ", lit:"文学・音楽・美術", sf:"SF・海外", society:"社会・都市・建築"};
+const EVL = {self:"大友の仕事", stated:"本人が明言", crit:"批評上の系譜", co:"並走", out:"波及", inst:"制度的評価"};
+const AXD = {"":"三つの軸をすべて重ねて表示しています。",
+  A:"都市：震災・戦災・復興・五輪・再開発・震災・五輪。東京が上書きされるたびに、大友の瓦礫が現実と二重写しになる。",
+  B:"線：絵巻から手塚、劇画、ちばてつや、メビウス、ディズニーを経て「大友以後」へ。原画が美術館に入り、海外で「作者」になるまで。",
+  C:"地下：民俗学、探偵小説、伝奇SF、超能力ブーム、落語、今村昌平とATG。大友の本棚と映画館の記憶。"};
+// [year, axes, lane, evidence, title, relation, context, (display year)]
+const EV = [
+[1830,"B","lit","crit","浮世絵の線と構図（北斎・広重）","本人の言及はない。輪郭線で空間を組み、俯瞰と誇張遠近で都市を描く日本の画面構成として、批評では漫画の前史に置かれる。","『富嶽三十六景』『名所江戸百景』。江戸という都市を連作で描く、最初の「東京の図像史」。"],
+[1170,"B","lit","stated","『伴大納言絵巻』","『火要鎮』（2013）のイメージ源として挙げた。横長の画面を群衆が流れ、火事の現場に人が集まる構図。","平安末期の絵巻。日本の「横に流れる画面」の原型で、漫画の起源を語るときに必ず出てくる。","12世紀"],
+[1898,"AC","lit","stated","H・G・ウェルズ『宇宙戦争』","『Akira club』のアンケートで「心に残っている一冊」。火星人の侵略で帝都が壊れていくのを、逃げる人間の目線で追う。","近代SFの起点のひとつ。都市が壊れる光景を娯楽として読む習慣は、『ゴジラ』や『AKIRA』まで続く。"],
+[1910,"C","lit","stated","柳田國男『遠野物語』","「若き日の大友作品を理解する10冊」の一つ。本棚には『雪国の春』『妹の力』もあった。","日本民俗学の出発点。河童、座敷童子、神隠し。山と村に残る異界の記録。"],
+[1923,"A","society","crit","関東大震災と帝都復興","本人の言及はない。東京が丸ごと焼け、後藤新平の復興計画で道路と公園が引き直された。『AKIRA』の「ネオ東京」が最初の上書きとして前提にする層。","死者10万人。昭和モダン都市はこの焼け跡の上に建った。"],
+[1925,"B","film","stated","エイゼンシュテインのモンタージュ理論","映画関連本として挙げている。コマとコマの衝突で意味をつくる大友の割付の、理論的な裏づけ。","ソ連映画の編集理論。『戦艦ポチョムキン』のオデッサの階段。画と画をぶつけて第三の意味を生む。"],
+[1926,"C","lit","stated","江戸川乱歩『鏡地獄』","1976年に大友自身が漫画化。10冊の一つ。本棚には『幽霊塔』『孤島の鬼』『一寸法師』も。","大正末の探偵小説。鏡に囲まれた球体に閉じこもる男。昭和モダンの猟奇趣味と、閉じた空間の恐怖。"],
+[1935,"C","lit","stated","夢野久作『ドグラ・マグラ』","10冊の一つ。松本俊夫の映画版も良いと語る。","精神病院を舞台にした迷宮小説。三大奇書。記憶と自己の境界が溶ける構造。"],
+[1939,"C","lit","stated","折口信夫『死者の書』","短編『BOOGIE WOOGIE WALTZ』で意識したと語る。","民俗学者による古代幻想小説。死者の声から始まる語り。柳田とともに大友の「土着」の層。"],
+[1940,"B","film","stated","ディズニー『ファンタジア』","1980年の『スターログ』で『白雪姫』『101匹わんちゃん』とともに挙げた。","動きの観察と誇張を体系化したアニメーションの規範。後年「大友は最初から原画が描けた、アニメーションは観察だから」と言われる根。"],
+[1945,"A","society","crit","敗戦。焼け跡の東京","『AKIRA』が描く「破壊された後の都市」の原風景。本人は1954年生まれで直接の記憶はない。","関東大震災に続く二度目の全面的な焼失。戦後復興と再開発の反復という主題がここから始まる。"],
+[1947,"B","manga","crit","手塚治虫『新宝島』","本人の言及はない。映画的コマ割りの始まりとされる神話的な一冊。","赤本漫画のベストセラー。藤子不二雄や石ノ森が衝撃を受けたと語る、戦後漫画の起点。"],
+[1952,"B","manga","stated","手塚治虫『鉄腕アトム』","尊敬する三人（手塚・石ノ森・横山）の一人で、繰り返しオマージュを捧げている。ただし『童夢』の頃に読み直して「テンポが速すぎた」とも語る。1963年のTVアニメ版も挙げた。","記号化されたキャラクターとストーリー漫画の体系。大友はこの文法を前提にしつつ、顔と背景を写実で描く方向へ離れた。"],
+[1954,"ABC","otomo","self","大友克洋、宮城県に生まれる","登米郡（現・登米市）出身。映画好きの少年で、高校時代は仙台の映画館に通った。",""],
+[1954,"A","film","crit","『ゴジラ』","本人の言及はない。水爆実験で目覚めた怪獣が東京を焼く。『宇宙戦争』から『AKIRA』へ続く「東京が壊れる図像」の戦後の起点。","本多猪四郎監督、円谷英二特撮。戦災の記憶を怪獣に変換した。"],
+[1954,"B","film","stated","黒澤明『七人の侍』","「特に血肉となっている7本」。『大系 黒澤明』で黒澤本人と対談。志村喬は「最近気になっている俳優」にも挙げた。","戦後日本映画の頂点。集団と暴力の演出、雨と泥の質感。『AKIRA』の題名が黒澤由来とする説の本人一次発言は確認できていない。"],
+[1955,"C","lit","stated","落語（志ん生、志ん朝、圓生ほか）","漫画エッセイ『饅頭こわい』を描き、志ん生のDVDや志ん朝全集を手元に置く。『Akira club』では「イタコで呼んでほしい人」に志ん生の『三年目』。","江戸の話芸。語りの間とテンポの芸で、大友の「歩く速さが合う」漫画観とつながる。"],
+[1956,"AB","manga","stated","横山光輝『鉄人28号』","尊敬する三人の一人。『AKIRA』の金田、鉄雄、敷島、28号（アキラ）は『鉄人』の固有名の引用。1963年のTVアニメ版も挙げた。","戦時中の秘密兵器を少年が操る物語。戦争の記憶を少年向け娯楽に変換した最初期の例。"],
+[1957,"C","lit","stated","大江健三郎『死者の奢り』","10冊の一つ。本棚には『万延元年のフットボール』『叫び声』『空の怪物アグイー』も。","戦後文学の新世代。閉塞した若者と身体の感覚。"],
+[1958,"B","film","stated","オーソン・ウェルズ『黒い罠』","血肉の7本。","フィルム・ノワールの終幕。冒頭の長回し、汚職警官、車の爆発。『大砲の街』のワンカット志向と並べて語られる。"],
+[1959,"B","manga","crit","劇画工房（辰巳ヨシヒロら）","批評では大友の写実を劇画の延長線上に置くことが多い。本人が辰巳や劇画工房を挙げた発言は確認できず、本人の言葉での写実の出所はちばてつやと村野守美。","大人向けの写実的な漫画の運動。貸本から生まれ、『ガロ』『ビッグコミック』の土壌になった。"],
+[1960,"A","society","crit","丹下健三「東京計画1960」","本人の言及はない。東京湾に都市軸を伸ばす巨大計画。『AKIRA』のネオ東京が湾を埋め立てた都市であることと響く。","メタボリズムの前夜。成長する都市を構造として描いた戦後建築の頂点。"],
+[1962,"C","lit","stated","安部公房『砂の女』、三島由紀夫『美しい星』","ともに10冊。『美しい星』は自分たちを宇宙人と信じる一家の物語で、『童夢』『AKIRA』の「選ばれた者」の感覚に近い。","60年代の純文学がSF的設定を借りた例。"],
+[1963,"C","film","stated","今村昌平『にっぽん昆虫記』","血肉の7本。初期漫画『心中-74'秋』の中で『赤い殺意』とともに直接言及。名画座の今村特集で見た。","重喜劇。土着と欲望、農村と売春。60年代日本映画の「汚れた写実」。"],
+[1963,"BC","manga","stated","桑田次郎『8マン』","『芸術新潮』で挙げた。原作は平井和正。","ロボット刑事もの。平井はのちに『幻魔大戦』の原作者。"],
+[1964,"A","society","crit","東京オリンピック、首都高、新幹線","都市を上書きする祝祭。『AKIRA』の「2020年東京オリンピック」はこの反復として置かれている。","戦後復興の完了宣言。首都高が川と堀を覆い、江戸の水路が消えた。"],
+[1964,"B","manga","stated","石ノ森章太郎『サイボーグ009』","尊敬する三人の一人。『漫画家入門』（1965）で基礎を学んだと対談で語ったとされる。","改造人間の少年少女という設定は、超能力を植え付けられた『AKIRA』の子どもたちの遠い先祖。"],
+[1964,"BC","manga","crit","『ガロ』創刊","本人の言及はないが、本棚には白土三平『カムイ伝』があった。","つげ義春らを生んだ雑誌。商業誌の外で「作者」として描く漫画家像が育った。"],
+[1965,"B","manga","stated","水木しげる","『芸術新潮』で、異様に描き込まれた背景について語った。","『ゲゲゲの鬼太郎』。点描と写真トレースを使った密度の高い背景。「背景が主役」の先例。"],
+[1966,"C","lit","stated","昭和歌謡","『BRUTUS』のプレイリストに美空ひばり、黛ジュン、浅川マキ、ザ・ピーナッツらを並べた。","高度成長期の大衆歌。初期短編の70年代の若者の部屋に流れている音。"],
+[1967,"C","film","stated","パゾリーニ『アポロンの地獄』","血肉の7本。『王女メディア』『ソドムの市』も所有。","ギリシャ悲劇を現代と往還させる。過去と未来が入り乱れる構成。"],
+[1968,"B","film","stated","キューブリック『2001年宇宙の旅』","1980年の『スターログ』特集に寄稿、2001年の『アニメージュ』でも挙げた。メカデザインの影響源としても。","空間の冷たさ、無音の暴力、人間を超える知性。"],
+[1968,"AC","society","crit","全共闘、安保闘争","『AKIRA』の革命家・竜や反政府ゲリラは、この記憶を80年代に持ち込んだものという批評上の読み。","学生運動の身体性と挫折。"],
+[1968,"C","manga","crit","つげ義春『ねじ式』","本人の言及はない。『ガロ』から出た、土着と悪夢の漫画の頂点として批評では大友の前史に置かれる。","温泉町、漁村、医者を探す男。戦後日本の地方の無意識。"],
+[1969,"BC","film","stated","『イージー・ライダー』","2013年の映画祭「爆音大友克洋」で本人が上映を希望した1本。初期短編の乾いた空気はここから。","アメリカン・ニューシネマの旗印。バイク、放浪、英雄不在。"],
+[1969,"B","film","stated","ペキンパー『ワイルドバンチ』","短編「サン・バーグズヒルの思い出」でオマージュ。『ガルシアの首』『わらの犬』『戦争のはらわた』も。","暴力のスローモーション。西部劇の終わりを描いた西部劇。"],
+[1969,"C","film","stated","篠田正浩『心中天網島』","血肉の7本。ATG作品。","近松の心中物を、黒衣が出てくる実験演出で映画化。"],
+[1969,"AC","lit","stated","ヴォネガット『スローターハウス5』","10冊。『タイタンの妖女』『プレイヤー・ピアノ』にも言及。","ドレスデン爆撃を時間跳躍で語る。『気分はもう戦争』の乾いた戦争観の源。"],
+[1970,"B","film","stated","アーサー・ペン『小さな巨人』","血肉の7本。『俺たちに明日はない』も挙げる。","修正主義西部劇。"],
+[1971,"AC","lit","stated","半村良『石の血脈』","10冊の筆頭。本棚に『妖星伝』も。","伝奇SF。不死、古代史、東京を一本に結ぶ。超能力と古代神話を現代都市に接続する手つきは、『AKIRA』の「アキラ」神話化と同じ型。"],
+[1971,"B","film","crit","キューブリック『時計じかけのオレンジ』","レーザーディスクで所有。金田たちの造形と比較されるが、本人がその関係を語った発言は確認できない。","少年グループと様式化された暴力。"],
+[1971,"C","film","stated","寺山修司『書を捨てよ町へ出よう』","DVD所有リストにある。羽仁進との『初恋・地獄篇』も。","天井桟敷、アングラ演劇。都市の若者と土着の記憶をぶつけた70年代前衛。"],
+[1972,"B","manga","stated","村野守美のもとで漫画の現場を経験","初めて体験した漫画の現場。フキダシの中に擬音を書く手法など、大きな影響を受けた。","双葉社系の劇画作家。大友の「技法の師」で、批評がほとんど触れない名前。"],
+[1972,"A","society","crit","高島平団地、中銀カプセルタワー","高島平は『童夢』の団地のモデル。黒川紀章の中銀カプセルはメタボリズムの実作で、2022年に解体。","団地という戦後空間と、新陳代謝する建築という夢が同じ年に建った。"],
+[1972,"C","lit","stated","マイルス・デイヴィス『On the Corner』","短編『ROUND ABOUT MIDNIGHT』の下敷きとして挙げた。","エレクトリック期のマイルス。ファンクとノイズ。"],
+[1973,"ABC","otomo","self","『銃声』で商業デビュー","『漫画アクション』（双葉社）。メリメの小説『マテオ・ファルコーネ』が原作。",""],
+[1973,"B","manga","stated","ちばてつや『のたり松太郎』","『童夢』の頃に漫画の文法を探し、吉祥寺のそば屋で『ビッグコミック』をめくって見つけた。「歩き方のスピードがちょうど同じ」と、随分と勉強したと語る。","『あしたのジョー』の作家の相撲漫画。大友は『ビッグコミック』を創刊号から読んでいた。"],
+[1973,"AC","sf","crit","小松左京『日本沈没』、『ノストラダムスの大予言』","本人の言及はない。小説と映画が同年に大ヒットし、五島勉の『大予言』と重なって終末ブームが始まる。『AKIRA』の「予言」はこの空気の中で読まれた。","オイルショックの年。列島が沈み、1999年に人類が滅ぶ、という二つの終末が同時に流行した。"],
+[1973,"C","lit","stated","ウェザー・リポート「Boogie Woogie Waltz」","同名短編の題。","ジャズ・フュージョン。"],
+[1973,"BC","film","stated","フェリーニ『アマルコルド』","血肉の7本。『8½』『ローマ』『サテリコン』『道』など多数所有。","故郷の記憶、群像、ファシズムの足音。『火要鎮』『SHORT PEACE』の群像劇とつながる。"],
+[1974,"C","society","crit","ユリ・ゲラー来日、超能力ブーム","『童夢』『AKIRA』の超能力は、この「身近な超能力」のリアリティを土台にしている。本人の明言はない。","スプーン曲げが茶の間の話題に。オカルトと科学が混じった70年代の空気。"],
+[1975,"B","sf","stated","『メタル・ユルラン』創刊、メビウス","メビウスの絵は一歩引いて背景と人物がきちんと描いてあり、「こんな風に絵を描けばいいんだな」と教えられた気がすると語る。メビウス側も『さよならにっぽん』に衝撃を受けたと述べ、相互影響になった。","フランスBD誌。均一な線で空間を埋める密度と、俯瞰のパース。"],
+[1975,"C","sf","crit","筒井康隆『七瀬ふたたび』","本人の言及はない。超能力者の少女が同類と出会い、追われる物語で、『童夢』『AKIRA』の子どもたちの文学側の先例。","70年代日本SFの超能力もの。NHKでドラマ化。"],
+[1976,"AB","film","stated","スコセッシ『タクシードライバー』","1979年の短編『RUN』でデ・ニーロの画をオーバーラップさせた。","ニューシネマ後期。都市と孤独、暴力の爆発。"],
+[1976,"C","film","crit","角川映画『犬神家の一族』","本棚に横溝正史が多数（『本陣殺人事件』は10冊の一つ）。角川映画が横溝ブームを起こした年。","出版と映画の連動商法の始まり。田舎の旧家、血縁、猟奇。"],
+[1977,"B","sf","stated","スタジオぬえ『宇宙の戦士』パワードスーツ","メカデザインの影響源として、宮武一貴と加藤直之のいたスタジオぬえの存在が大きいと語る。","日本SFイラストの工房。ガンダム以後のメカ観の源。"],
+[1977,"B","film","stated","『スター・ウォーズ』","江口寿史との対談、CINRAの対談で挙げた。","「使い込まれた未来」の美術。メカを汚して描く発想が広がる。"],
+[1979,"ABC","otomo","self","『ショート・ピース』『ハイウェイスター』『Fire-ball』『RUN』","短編集の刊行と、SFへの転回。『Fire-ball』は未完だが『童夢』『AKIRA』の種になった。",""],
+[1979,"B","manga","co","漫画ニューウェーブ","高野文子、いしいひさいち、吾妻ひでおら。大友はその中心に数えられた。いしいひさいちは本人も挙げている。","『漫画アクション』『マンガ少年』周辺で、手塚的文法を更新する作家群が現れた。"],
+[1979,"C","lit","stated","平井和正『幻魔大戦』","本棚にシリーズがあり、1983年の映画版でキャラクターデザインを担当。","超能力者が世界の終わりと戦う伝奇SF。『8マン』の原作者が70年代オカルトと合流した作品。"],
+[1980,"B","manga","out","鳥山明『Dr.スランプ』","大友の影響を公言する作家の代表。","緻密なメカと汚しの表現が、少年誌の主流に流れ込んだ。"],
+[1980,"AC","otomo","self","『童夢』連載開始","マンモス団地（モデルは高島平）で起きる老人と少女の超能力戦。団地の集団自殺のニュースから着想。1983年に単行本化、漫画として初めて日本SF大賞を受賞。背景が主役になった最初の作品。",""],
+[1981,"C","lit","co","横尾忠則「画家宣言」","本人の言及はない。グラフィックデザイナーが画家に転じ、UFO、滝、オカルトを描き始める。","70年代オカルトが美術の側に流れ込んだ例。"],
+[1981,"A","otomo","self","『気分はもう戦争』","矢作俊彦原作。中ソ国境の戦場に向かう若者たち。",""],
+[1982,"AB","film","stated","『ブレードランナー』とシド・ミード","CINRA対談で、シド・ミードによる近未来都市のデザインを語った。江口寿史との対談でも挙げる。","雨とネオンのアジア的未来都市。『AKIRA』連載開始の半年前に公開された。"],
+[1982,"B","film","stated","『トロン』","CINRA対談で、この映画のバイクも手本にしたと語った。","シド・ミードのライトサイクル。金田のバイクの系譜。"],
+[1982,"ABC","otomo","self","『AKIRA』連載開始","『週刊ヤングマガジン』12月号から。第三次世界大戦後の2019年、ネオ東京。1990年まで続く。",""],
+[1983,"C","otomo","self","『幻魔大戦』キャラクターデザイン","りんたろう監督作。この後、りんたろうに「アニメ作っちゃいな」と言われたのが監督への入口になった。",""],
+[1984,"A","sf","co","ギブスン『ニューロマンサー』","本人の言及はない。『AKIRA』とほぼ同時に、別の場所で同じ未来像が立ち上がった。","サイバーパンクの命名。"],
+[1984,"B","film","co","宮崎駿『風の谷のナウシカ』","本人の言及は絵コンテ集を持っていることのみ。漫画家が自作を自ら監督する先例。","作家主義のアニメ映画が成立しうることを示した。"],
+[1985,"B","manga","out","士郎正宗『アップルシード』","大友的な密度を情報と機械の方向へ押し広げた。","のちの『攻殻機動隊』へ。"],
+[1987,"B","otomo","self","『迷宮物語』「工事中止命令」","オムニバスの一編でアニメ監督デビュー。原画も自ら描いた。",""],
+[1988,"ABC","otomo","self","映画『AKIRA』公開","7月公開。海外での「ジャパニメーション」の先駆けとされる。",""],
+[1988,"B","sf","out","Epic Comics版『AKIRA』、スティーヴ・オリフの彩色","マーベル系Epicから米国初のフルカラー英訳。コンピュータ彩色の初期の大規模な例。","漫画が「アメコミの形式」に翻訳されて渡った。欧米で大友が最初に知られた入口。"],
+[1988,"A","lit","crit","宮本隆司『建築の黙示録』","本人の言及はない。解体現場の写真集で、『AKIRA』の映画と同年。瓦礫の写真集を参考にすると本人が語る嗜好と重なる。","バブル期の解体現場を廃墟として撮った。東京が壊されながら建つ瞬間の記録。"],
+[1988,"B","lit","stated","Yello「The Race」","『AKIRA』作画中のBGM。The Orb、The KLF、Underworldも挙げた。","80年代後半のクラブ文化。"],
+[1988,"C","film","stated","松本俊夫『ドグラ・マグラ』","夢野久作の映画化として良いと語る。『松本俊夫全劇映画 DVD-BOX』を所有。","実験映画の作家による唯一の奇書映画化。"],
+[1989,"A","film","co","塚本晋也『鉄男』","『AKIRA』と並んで「ジャパニーズ・サイバーパンク」として海外で受容された。","肉体と金属の融合。自主製作16mm。"],
+[1989,"A","society","co","昭和の終わり、ベルリンの壁崩壊","冷戦を前提にしたSFの終点。『AKIRA』はこの転換期をまたいで完結する。",""],
+[1990,"ABC","otomo","self","『AKIRA』連載完結","全6巻。以後、大友は長編漫画からほぼ離れ、映像へ軸足を移す。",""],
+[1990,"B","sf","out","Glénat仏語版『AKIRA』","フランスで刊行開始。BD圏が大友を「作者」として迎える最初の回路。","のちのアングレーム受賞と特集展につながる。"],
+[1990,"B","manga","out","井上雄彦『SLAM DUNK』","『BRUTUS』合本で大友と対談。写実の身体を少年誌の主流にした。","90年代少年漫画の写実化。"],
+[1991,"A","otomo","self","『老人Z』","原作・脚本・メカニックデザイン。高齢化と介護ロボットという、バブル末期の日本を正面から扱った。",""],
+[1991,"A","society","crit","東京都庁の新宿移転、バブル崩壊","本人の言及はない。丹下健三設計の新都庁が開庁し、同時に地価が崩れた。『老人Z』はこの年の作品。","上書きが止まった最初の瞬間。"],
+[1992,"B","manga","crit","夏目房之介『手塚治虫はどこにいる』","漫画を線と記号で読む批評の起点。「大友以後」を言語化する前提になった。","記号論的漫画批評。"],
+[1994,"B","manga","out","浦沢直樹『MONSTER』","AERAの特集で「大友さんが世に出てきた時に、こういう線を描きたいと思った」と語る。2025年の『漫勉neo』で大友と対談。","写実と映画的演出のミステリ。"],
+[1995,"A","otomo","self","『MEMORIES』","「大砲の街」を監督。ワンカット風の長回しで、戦争が日常になった都市を描く。",""],
+[1995,"AB","film","out","押井守『攻殻機動隊』","『AKIRA』が開いた海外の回路で評価された。","のちに『マトリックス』へ直接つながる。"],
+[1995,"A","manga","out","『新世紀エヴァンゲリオン』","貞本義行のキャラクター、第3新東京市、少年と兵器。『AKIRA』の破壊と再生の構図を90年代に引き継いだ。",""],
+[1995,"B","manga","out","寺田克也『西遊奇伝 大猿王』","大友以後の線を、筆とデジタルの両方で押し広げた作家。",""],
+[1995,"AC","society","co","阪神・淡路大震災、地下鉄サリン","描かれてきた「破壊と終末」が現実の都市で起きた年。超能力と終末のブームは、オウムという形で終わった。",""],
+[1999,"B","film","out","『マトリックス』","ウォシャウスキー姉妹が『AKIRA』『攻殻機動隊』の参照を公言。","日本のアニメ表現がハリウッドの文法に入る。"],
+[2000,"B","lit","co","村上隆「スーパーフラット」","本人の言及はない。漫画・アニメと美術を一つの平面に置いた批評。大友の「均質空間」とは別の経路で、漫画が美術館に入る理屈をつくった。","2005年の『リトルボーイ』展へ続く。"],
+[2002,"B","otomo","inst","アイズナー賞殿堂入り","米コミック界の殿堂。",""],
+[2003,"A","society","crit","六本木ヒルズ開業","本人の言及はない。森ビルの「垂直庭園都市」。バブル崩壊後に再開した大規模再開発の始まり。","ネオ東京的な超高層と、丹下的な都市軸の夢が、民間資本で再現された。"],
+[2004,"B","otomo","self","『スチームボーイ』","19世紀ヴィクトリア朝イギリス。同年の『PREMIERE』でメビウスと対談。",""],
+[2006,"C","otomo","self","実写『蟲師』","漆原友紀原作。土着と異界の物語を実写で。",""],
+[2007,"B","film","out","カニエ・ウェスト「Stronger」MV","『AKIRA』の場面を再現。","アニメ映画がポップミュージックの映像語彙になった。"],
+[2011,"A","society","co","東日本大震災","瓦礫の都市のイメージが再び現実に。『AKIRA』の読み直しが起きる。",""],
+[2011,"A","lit","co","Chim↑Pom『REAL TIMES』","本人の言及はない。震災直後の福島と渋谷に介入した作品群。現代美術が「壊れる東京」を主題にした代表例。","岡本太郎《明日の神話》への付け足しで知られる。"],
+[2012,"B","otomo","self","「大友克洋GENGA展」、『芸術新潮』『BRUTUS』特集","3331 Arts Chiyodaで原画が美術館的に展示された最初の大規模展。同年のインタビューで本人が影響源を最もまとまった形で語った。",""],
+[2012,"C","film","out","『クロニクル』","ジョシュ・トランク監督が『AKIRA』を参考にしたと公言。","超能力に目覚めた少年の暴走。"],
+[2013,"BC","otomo","self","『SHORT PEACE』「火要鎮」、紫綬褒章","江戸の火事を描いた短編。『伴大納言絵巻』がイメージ源。紫綬褒章はアニメーション分野では1998年の高畑勲以来。",""],
+[2013,"AB","lit","out","会田誠、山本直樹（AERA特集）","AERAの特集「大友克洋が生んだ衝撃と未来」で、会田誠、山本直樹、浦沢直樹らが影響を語った。","現代美術の側から大友の影響を公言した例。"],
+[2013,"A","society","co","2020年東京オリンピック決定","『AKIRA』の「予言」としてネットで話題に。作品が現実の都市史と二重写しになる。",""],
+[2014,"B","otomo","inst","フランス芸術文化勲章オフィシエ","2005年のシュヴァリエに続く叙勲。",""],
+[2015,"B","otomo","inst","アングレーム国際漫画祭 最優秀賞","日本人として初。翌2016年の漫画祭で特集展。欧州BD圏での正典化。",""],
+[2016,"A","film","co","『シン・ゴジラ』","本人の言及はない。東京の破壊を官僚機構の目線で描き直した。『ゴジラ』『AKIRA』に続く「壊れる東京」の現代版。","庵野秀明監督。3.11以後のゴジラ。"],
+[2019,"B","otomo","self","『AKIRA』新アニメ化プロジェクト発表","新作『ORBITAL ERA』とともに発表。",""],
+[2019,"B","manga","inst","大英博物館「マンガ」展","漫画が欧米の美術館で大規模に展示された画期。","原画と印刷物が「作品」として扱われる流れの到達点。"],
+[2019,"A","society","crit","渋谷の再開発","本人の言及はない。渋谷スクランブルスクエア開業。2020年代の東京は再び上書きの最中にある。",""],
+[2021,"A","society","co","東京オリンピック、1年延期ののち無観客開催","『AKIRA』の看板「中止だ中止」が現実とともに語られた。",""],
+[2021,"C","film","out","『イノセンツ』","ノルウェーの団地を舞台にしたサイキックスリラー。『童夢』からの着想を公言。デル・トロも『童夢』実写化を試みた。",""],
+[2022,"B","otomo","self","『大友克洋全集』刊行開始","講談社。第1回配本は『童夢』と『AKIRA』絵コンテ集。",""],
+[2023,"B","otomo","self","AKIRAセル画展","全集刊行を記念して東京・大阪で開催。",""],
+[2025,"B","otomo","self","NHK『浦沢直樹の漫勉neo』出演","生原稿から大友の線と構図が解説された。浦沢は『AKIRA』以上に『童夢』の衝撃を語っている。",""],
+[2026,"B","otomo","self","新スタジオ「OVAL GEAR」設立","5月に設立、新作アニメーションが進行中。4月に「午前十時の映画祭」で『AKIRA』が動員歴代1位、12月に『老人Z』4Kリマスター劇場公開。",""]
+];
+
+const dirPath = {
+  stated:'<path d="M2 2 L14 10 M14 4 L14 10 L8 10"/>',
+  crit:'<path d="M2 2 L14 10 M14 4 L14 10 L8 10"/>',
+  out:'<path d="M2 10 L14 2 M8 2 L14 2 L14 8"/>',
+  co:'<path d="M2 6 L16 6"/>'
+};
+const decadeLabel = d => d===0 ? "前史" : d+"年代";
+EV.sort((a,b)=>a[0]-b[0]);
+const root = document.getElementById('timeline');
+let curDecade = null, list = null;
+EV.forEach(e=>{
+  const [yr,ax,lane,ev,title,note,cx,disp] = e;
+  const dec = yr<1945 ? 0 : Math.floor(yr/10)*10;
+  if(dec!==curDecade){
+    curDecade = dec;
+    const sec = document.createElement('section'); sec.className='decade';
+    sec.innerHTML = '<h2>'+decadeLabel(dec)+'</h2><ul class="tl"></ul>';
+    root.appendChild(sec); list = sec.querySelector('.tl');
+  }
+  const li = document.createElement('li');
+  li.className = 'ev '+lane; li.dataset.lane = lane; li.dataset.ev = ev; li.dataset.ax = ax;
+  li.style.setProperty('--lc','var(--'+(lane==='otomo'?'spine':lane)+')');
+  const arrow = dirPath[ev] ? '<svg class="dir'+(ev==='crit'?' dashed':'')+'" viewBox="0 0 18 12" aria-hidden="true">'+dirPath[ev]+'</svg>' : '';
+  const badge = (ev==='self') ? '' : '<span class="badge'+(ev==='stated'?' stated':'')+'">'+EVL[ev]+'</span>';
+  const axl = '<span class="ax">'+ax.split('').map(c=>({A:"Ａ",B:"Ｂ",C:"Ｃ"})[c]).join(' ')+'</span>';
+  const body = (note||cx) ? '<div class="body">'+(note?'<div class="n">'+note+'</div>':'')+(cx?'<div class="cx"><b>周辺文脈</b>'+cx+'</div>':'')+'</div>' : '';
+  li.innerHTML = '<div class="yr">'+(disp||yr)+'</div><span class="node"></span>'
+    + '<div class="card" tabindex="0" role="button" aria-expanded="false"><div class="t">'+arrow+'<span>'+title+'</span></div>'
+    + '<div class="meta"><span class="lane">'+LANES[lane]+'</span>'+badge+axl+'</div>'+body+'</div>';
+  list.appendChild(li);
+});
+
+root.addEventListener('click', e=>{
+  const c = e.target.closest('.card'); if(!c) return;
+  c.classList.toggle('open'); c.setAttribute('aria-expanded', c.classList.contains('open'));
+});
+root.addEventListener('keydown', e=>{
+  if((e.key==='Enter'||e.key===' ') && e.target.classList.contains('card')){ e.preventDefault(); e.target.click(); }
+});
+
+const tabs = document.querySelectorAll('.tab');
+const laneChips = document.querySelectorAll('.chip[data-lane]');
+const only = document.getElementById('onlyStated');
+const desc = document.getElementById('axisdesc');
+let curAx = '';
+function applyFilter(){
+  const active = new Set([...laneChips].filter(c=>c.getAttribute('aria-pressed')==='true').map(c=>c.dataset.lane));
+  const statedOnly = only.getAttribute('aria-pressed')==='true';
+  document.querySelectorAll('.ev').forEach(ev=>{
+    const laneOk = active.has(ev.dataset.lane);
+    const evOk = !statedOnly || ev.dataset.ev==='stated' || ev.dataset.ev==='self';
+    const axOk = !curAx || ev.dataset.ax.indexOf(curAx)>=0;
+    ev.classList.toggle('hide', !(laneOk && evOk && axOk));
+  });
+  document.querySelectorAll('.decade').forEach(d=>{ d.style.display = d.querySelector('.ev:not(.hide)') ? '' : 'none'; });
+}
+tabs.forEach(t=>t.addEventListener('click', ()=>{
+  tabs.forEach(x=>x.setAttribute('aria-pressed','false'));
+  t.setAttribute('aria-pressed','true'); curAx = t.dataset.ax; desc.textContent = AXD[curAx]; applyFilter();
+}));
+laneChips.forEach(ch=>ch.addEventListener('click', ()=>{
+  ch.setAttribute('aria-pressed', ch.getAttribute('aria-pressed')==='true'?'false':'true'); applyFilter();
+}));
+only.addEventListener('click', ()=>{
+  only.setAttribute('aria-pressed', only.getAttribute('aria-pressed')==='true'?'false':'true'); applyFilter();
+});
+</script>
+</body>
+</html>

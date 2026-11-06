@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>大友克洋の生態系</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ECEAE4; --paper:#F6F4EE; --ink:#17191B; --ink2:#4F5256; --ink3:#878A8C; --rule:#CFCBC2;
+  --spine:#B5121B; --spine-soft:#F6DDDE;
+  --pub:#2F6F8F; --anime:#6B5B95; --place:#8A6D2E; --peer:#B5121B; --abroad:#2E7D5B; --crit:#5B5B62;
+  --gap:#C9A227;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#1A1B1D; --paper:#232527; --ink:#E7E4DC; --ink2:#B3B0A8; --ink3:#7F827F; --rule:#3B3E41;
+  --spine:#EB4A52; --spine-soft:#3A1F22;
+  --pub:#7FB3DA; --anime:#B0A4D6; --place:#D6B36A; --peer:#EB4A52; --abroad:#7CC9A3; --crit:#B6B6BE; --gap:#E3C14F; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#1A1B1D; --paper:#232527; --ink:#E7E4DC; --ink2:#B3B0A8; --ink3:#7F827F; --rule:#3B3E41;
+  --spine:#EB4A52; --spine-soft:#3A1F22;
+  --pub:#7FB3DA; --anime:#B0A4D6; --place:#D6B36A; --peer:#EB4A52; --abroad:#7CC9A3; --crit:#B6B6BE; --gap:#E3C14F; color-scheme:dark;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 90px}
+header{padding:54px 0 22px}
+h1,h2,h3{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:700;margin:0}
+.kicker{font-family:"Shippori Mincho B1",serif;font-size:13px;letter-spacing:.14em;color:var(--ink3);margin-bottom:8px}
+h1{font-size:30px;line-height:1.3}
+.lead{color:var(--ink2);margin:14px 0 0;max-width:36em}
+.ctrl{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;padding:10px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.eras{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.era{appearance:none;border:1px solid var(--rule);background:var(--paper);color:var(--ink2);padding:6px 4px;font:inherit;font-size:12.5px;line-height:1.3;cursor:pointer;border-radius:8px;text-align:center}
+.era b{display:block;font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:13px;color:var(--ink)}
+.era[aria-pressed="true"]{background:var(--spine);border-color:var(--spine);color:#fff}
+.era[aria-pressed="true"] b{color:#fff}
+.era:focus-visible{outline:2px solid var(--spine);outline-offset:2px}
+
+.center{margin:22px 0 10px;padding:14px 16px;border:2px solid var(--spine);border-radius:12px;background:var(--spine-soft);display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+.center b{font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:20px;color:var(--spine);line-height:1.2}
+.center span{font-size:13px;color:var(--ink2);line-height:1.6}
+
+.eco{margin:14px 0 0;border-left:3px solid var(--ec);padding-left:12px}
+.eco h2{font-size:16px;line-height:1.4;color:var(--ec)}
+.eco .sub{font-size:12.5px;color:var(--ink2);margin:2px 0 8px;line-height:1.6}
+.eras3{display:grid;grid-template-columns:1fr;gap:8px}
+.cell{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:8px 10px 9px}
+.cell h3{font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);margin-bottom:6px}
+.cell.hide{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.node{appearance:none;border:1px solid var(--rule);background:var(--bg);color:var(--ink);border-radius:999px;padding:4px 10px;font:inherit;font-size:13px;line-height:1.4;cursor:pointer;text-align:left}
+.node.broker{border-color:var(--ec);box-shadow:0 0 0 1px var(--ec) inset}
+.node.on{background:var(--ec);color:#fff;border-color:var(--ec)}
+.node:focus-visible{outline:2px solid var(--spine);outline-offset:2px}
+.detail{display:none;margin:8px 0 0;padding:9px 12px;border-left:3px solid var(--ec);background:var(--bg);border-radius:8px;font-size:13.5px;line-height:1.7;color:var(--ink)}
+.detail.show{display:block}
+.detail b{display:block;font-weight:500;margin-bottom:2px}
+.detail .bk{font-size:11px;color:var(--ec);letter-spacing:.06em;margin-left:6px}
+.gaps{margin:28px 0 0;padding:14px 16px;border:1.5px dashed var(--gap);border-radius:12px}
+.gaps h2{font-size:16px;color:var(--gap);margin-bottom:6px}
+.gaps p{margin:0;font-size:14px;line-height:1.75;color:var(--ink2)}
+.gaps p strong{color:var(--ink);font-weight:500}
+.legend{font-size:12px;color:var(--ink3);margin:8px 0 0;line-height:1.6}
+.legend i{display:inline-block;width:14px;height:10px;border:1px solid var(--ink3);border-radius:999px;vertical-align:middle;margin:0 3px 2px 0;box-shadow:0 0 0 1px var(--ink3) inset}
+.foot{margin-top:28px;padding-top:14px;border-top:1px solid var(--rule);font-size:12px;color:var(--ink3);line-height:1.7}
+@media (min-width:640px){ h1{font-size:38px} .eras3{grid-template-columns:repeat(3,1fr)} .eco{margin-top:20px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">地層／STRATA　調査資料</div>
+  <h1>大友克洋の生態系</h1>
+  <p class="lead">大友がどの生態系の中で作られ、誰に運ばれ、どこに属していないかの地図。縦に六つの生態系、横に三つの時期。枠線の太い項目は、大友を別の生態系へ運んだ「結節点」。項目をタップで補足が出ます。</p>
+</header>
+
+<div class="ctrl">
+  <div class="eras">
+    <button class="era" data-e="" aria-pressed="true"><b>全期</b>1973–2026</button>
+    <button class="era" data-e="1" aria-pressed="false"><b>出発期</b>1973–82</button>
+    <button class="era" data-e="2" aria-pressed="false"><b>AKIRA期</b>1982–95</button>
+  </div>
+  <div class="eras" style="margin-top:6px;grid-template-columns:1fr 1fr">
+    <button class="era" data-e="3" aria-pressed="false"><b>正典化期</b>2002–2026</button>
+    <button class="era" data-e="0" aria-pressed="false"><b>前史</b>〜1973</button>
+  </div>
+  <p class="legend"><i></i>結節点＝大友を別の生態系へ運んだ人・組織</p>
+</div>
+
+<div class="center"><b>大友克洋<br><span style="font-size:12px;letter-spacing:.1em;color:var(--ink3)">1954–</span></b><span>自分から営業しない作家。生態系は「誰かが大友を別の場所へ運んだ」形で広がった。漫画家としての身分は講談社と双葉社に、映像作家としての身分はマッドハウスとサンライズの系列に、作者（auteur）としての身分は欧州にある。</span></div>
+
+<div id="grid"></div>
+
+<div class="gaps">
+  <h2>空いている生態系</h2>
+  <p><strong>日本の公立美術館。</strong>2012年のGENGA展は3331 Arts Chiyoda（アートセンター）で実行委員会方式。海外の殿堂と勲章、国内の全集はあっても、美術館の回顧展だけが未開催。<br><strong>建築・都市計画。</strong>都市の作家でありながら、建築家や都市史の側から論じられた記録が薄い。<br><strong>現代美術のギャラリーと市場。</strong>影響を語る美術家はいても、作品が美術市場の文脈に置かれたことがない。<br>『地層』はこの三つの空白にちょうど重なる。</p>
+</div>
+
+<p class="foot">時期区分は便宜上。前史は大友以前に生態系をつくった人と場所。補足中の「本人明言」は大友自身のインタビュー・寄稿・アンケートに基づく。製作委員会の構成や役職は当時の公表資料に基づくが、一次確認が必要なものは「要確認」と記した。</p>
+</div>
+
+<script>
+const ERA = {0:"前史 〜1973",1:"出発期 1973–82",2:"AKIRA期 1982–95",3:"正典化期 2002–2026"};
+// eco: key, name, color var, sub, nodes: [era, name, detail, broker?]
+const ECO = [
+ {k:"pub", name:"版元・媒体", sub:"漫画家としての身分がある場所。生涯の版元は双葉社と講談社の二社。", nodes:[
+   [0,"双葉社『これがアングラだ！』1968","アングラのガイド本を出した版元が、5年後に大友のデビューの場になる。地下の出版と大友の出発点が重なる。"],
+   [1,"双葉社『漫画アクション』","1973年『銃声』でデビュー。『ショート・ピース』『さよならにっぽん』などの短編期を支えた青年誌。『気分はもう戦争』（矢作俊彦原作、1980–81）もアクション。",1],
+   [1,"朝日ソノラマ『マンガ少年』","『Fire-ball』（1979）。ニューウェーブ作家が集まった雑誌で、SFへの転回の場。"],
+   [1,"双葉社『アクション・デラックス』","『童夢』（1980–81）連載。1983年に単行本化し、漫画として初の日本SF大賞。"],
+   [2,"講談社『週刊ヤングマガジン』","『AKIRA』連載（1982–90）。以後、大友の版元は講談社が中心になる。",1],
+   [2,"講談社『Akira club』1995","本人のアンケートや作画資料をまとめた本。本人の明言の一次資料。"],
+   [2,"『スターログ』『アニメージュ』への寄稿","1980年のキューブリック特集、2001年の『2001年』特集。SF誌・アニメ誌が大友の言葉の出口だった。"],
+   [3,"講談社『大友克洋全集』2022–","第1回配本は『童夢』と『AKIRA』絵コンテ集。アーカイブ化の母体。",1],
+   [3,"『BRUTUS』『芸術新潮』特集 2012","本人が影響源を最もまとまって語った二冊。マガジンハウスと新潮社。"],
+   [3,"NHK『浦沢直樹の漫勉neo』2025","生原稿をテレビで解説する番組。公共放送が「線」を見せた。"]
+ ]},
+ {k:"anime", name:"アニメ・映像産業", sub:"映像作家としての身分。角川春樹事務所からマッドハウス、AKIRA製作委員会、サンライズへ。", nodes:[
+   [0,"東映動画・虫プロの系譜","りんたろう、丸山正雄は虫プロ出身。宮崎駿は東映動画出身。大友が入る前にアニメ産業の二つの源流ができていた。"],
+   [2,"角川春樹事務所『幻魔大戦』1983","りんたろう監督、マッドハウス制作、キャラクターデザイン大友。角川映画が漫画家をアニメに引き込んだ。",1],
+   [2,"りんたろう","『幻魔大戦』のあと「アニメ作っちゃいな」と背中を押した人（本人談）。『迷宮物語』（1987）で監督デビューの機会をつくった。",1],
+   [2,"マッドハウス（丸山正雄）","『幻魔大戦』『迷宮物語』『MEMORIES』の制作スタジオ。大友の映像の実務的な母体。",1],
+   [2,"AKIRA製作委員会 1988","講談社・毎日放送・バンダイ・博報堂・東宝・レーザーディスク・住友商事・東京ムービー新社の8社（要確認）。製作費約10億円。漫画の映画化に異業種が出資する型の早い例。",1],
+   [2,"森本晃司・井上俊之・なかむらたかし","『AKIRA』の作画の中核。森本は『MEMORIES』『彼女の想いで』を監督。大友の「線」を動かした人たち。"],
+   [2,"芸能山城組（山城祥二）","『AKIRA』の音楽。ガムランと声明の合唱。大友の都市に土着の音を入れた、生態系の中で最も重要な音楽的結節点。",1],
+   [2,"『老人Z』1991／APPP","原作・脚本・メカデザイン。北久保弘之監督。介護ロボットという現実の主題。"],
+   [3,"サンライズ／バンダイビジュアル『スチームボーイ』2004","製作費24億円とされる大作。以後『SHORT PEACE』（2013）、新『AKIRA』（2019発表）もサンライズ。",1],
+   [3,"『SHORT PEACE』2013","森田修平、安藤裕章、カトキハジメとのオムニバス。大友が若手を束ねる側に回った作品。"],
+   [3,"OVAL GEAR 2026","5月設立の新スタジオ。新作アニメーションが進行中。"]
+ ]},
+ {k:"place", name:"場・都市・映画館", sub:"大友が見て、住んで、展示された場所。仙台の映画館から渋谷の仮囲いまで。", nodes:[
+   [0,"仙台の映画館","高校時代に通った。映画志向の原点。"],
+   [0,"ATG新宿文化／アンダーグラウンド蠍座","血肉の7本に『心中天網島』（ATG）。地下の映画が地下の劇場で見られた時代。"],
+   [1,"吉祥寺","住んでいた街。そば屋で『ビッグコミック』をめくり、ちばてつやのテンポに出会った（本人談）。"],
+   [1,"名画座と岩波ホール","今村昌平特集を名画座で見た（本人談）。岩波ホールは1974年から欧米以外の名作を上映。大友が映画を学んだ時代の東京の場。"],
+   [2,"東京ムービー新社／『AKIRA』のスタジオ","1988年公開まで約2年。70人規模の作画チームが入った場所。"],
+   [3,"3331 Arts Chiyoda「GENGA展」2012","旧中学校を使うアートセンターで、実行委員会方式。原画約3000点。美術館ではなくアートセンターだった点が重要。",1],
+   [3,"爆音映画祭「爆音大友克洋」2013","boid（樋口泰人）の映画祭で本人が『イージー・ライダー』を選んだ。"],
+   [3,"渋谷PARCO「AKIRA ART WALL」2017–19","建て替え中の仮囲いに河村康輔がAKIRAをコラージュ。2019年にPARCO MUSEUMで「AKIRA ART OF WALL」展。都市の再開発そのものがAKIRAの展示面になった。",1],
+   [3,"「午前十時の映画祭」2026","『AKIRA』が初動3日間で映画祭歴代1位。映画館という場が今も現役。"],
+   [3,"アングレーム 2016 特集展","欧州BD圏での回顧展。日本の美術館より先に、フランスの漫画祭が大友を展示した。"]
+ ]},
+ {k:"peer", name:"同世代・協働者・交友", sub:"誰と作り、誰と語ったか。大友は語りたがらないので、相手側の証言が多い。", nodes:[
+   [0,"村野守美","最初に経験した漫画の現場。擬音をフキダシに入れる手法など（本人明言）。"],
+   [0,"手塚・石ノ森・横山光輝","尊敬する三人。『鉄人28号』の固有名を『AKIRA』に引用。"],
+   [1,"矢作俊彦","『気分はもう戦争』の原作者。ハードボイルド小説家と大友の最初の協働。"],
+   [1,"漫画ニューウェーブ（高野文子、いしいひさいち、吾妻ひでお、さべあのま）","『マンガ少年』『漫画アクション』周辺の同世代。大友はその中心に数えられた。いしいひさいちは本人も挙げる。"],
+   [1,"江口寿史","対談で『スター・ウォーズ』『ブレードランナー』を語り合った同世代。"],
+   [2,"メビウス","『さよならにっぽん』に衝撃を受けたと公言。大友は「こんな風に絵を描けばいいんだな」と語る。2004年『PREMIERE』で対談。日本と欧州をつないだ最大の結節点。",1],
+   [2,"鳥山明・士郎正宗","影響を公言した同世代と後続。大友の密度が少年誌と情報SFに広がった経路。"],
+   [2,"寺田克也","長く交友のある画家・漫画家。『SHORT PEACE』の周辺にも。大友以後の線を美術側へ運ぶ候補。"],
+   [3,"河村康輔","コラージュ作家。AKIRA ART WALLを作り、2019年CINRAで大友と対談。漫画を都市のグラフィックに変換した人。",1],
+   [3,"浦沢直樹","『漫勉neo』（2025）で大友と対談。『AKIRA』以上に『童夢』の衝撃を語る。漫画家が漫画家を「見せる」側に回った例。",1],
+   [3,"会田誠・山本直樹（AERA 2013）","特集「大友克洋が生んだ衝撃と未来」で影響を語った。現代美術の側からの数少ない証言。"],
+   [3,"井上雄彦","『BRUTUS』合本で対談。写実の身体を少年誌の主流にした後続。"]
+ ]},
+ {k:"abroad", name:"海外・制度・受容", sub:"作者（auteur）としての身分がある場所。日本の制度より欧米の制度が先に動いた。", nodes:[
+   [1,"日本SF大賞 1983","『童夢』が漫画として初受賞。SF界（日本SF作家クラブ）が最初に大友を制度に載せた。",1],
+   [2,"Epic Comics／マーベル 1988","米国初のフルカラー英訳。スティーヴ・オリフのコンピュータ彩色。欧米で大友が知られた入口。",1],
+   [2,"Glénat（仏）1990","仏語版『AKIRA』。BD圏が大友を迎えた回路で、アングレームへ続く。",1],
+   [2,"『マトリックス』1999","ウォシャウスキーが『AKIRA』参照を公言。海外受容が「引用される側」に転じた瞬間。"],
+   [3,"アイズナー賞殿堂 2002","米コミック界の殿堂。"],
+   [3,"フランス芸術文化勲章（2005 シュヴァリエ／2014 オフィシエ）","フランス政府の叙勲。"],
+   [3,"紫綬褒章 2013","アニメーション分野では高畑勲（1998）以来。日本の制度が追いついた年。"],
+   [3,"アングレーム最優秀賞 2015","日本人初。翌年に特集展。欧州での正典化の完了。",1],
+   [3,"大英博物館「マンガ」展 2019","漫画が欧米の美術館に入った画期。大友個人の回顧ではないが、前提をつくった。"]
+ ]},
+ {k:"crit", name:"批評・研究", sub:"大友を言葉にした人たち。「大友以後」という言い方は批評がつくった。", nodes:[
+   [0,"『漫画主義』（石子順造ら、1967–74）","つげ・白土を論じた最初期の漫画批評誌。装画は赤瀬川原平。大友以前に「線を批評する」場があった。"],
+   [1,"村上知彦『黄昏通信』1979","ニューウェーブを同時代に言語化した批評。大友が「新しい」と言われた最初期。"],
+   [2,"夏目房之介『手塚治虫はどこにいる』1992","線と記号で漫画を読む批評。「大友以後」の前提。",1],
+   [2,"大塚英志","80年代に徳間で編集者をしながら批評へ。大友を戦後漫画の転換点として繰り返し論じた。"],
+   [3,"ササキバラ・ゴウ「均質な空間」","絵から説明的な意味を取り去り、人物も風景も同じ質感で描くことで均質な空間を可能にした、という定義。"],
+   [3,"伊藤剛『テヅカ・イズ・デッド』2005","「キャラ／キャラクター」の区別。大友以後の線を理論化する前提。"],
+   [3,"トマス・ラマール『The Anime Machine』2009","英語圏のアニメ理論。多層画像、オープン・コンポジティング、「奥行きは密度に置き換わる」。『地層』の理論的な足場。",1],
+   [3,"中条省平（『芸術新潮』2012）","本人から影響源を引き出したインタビュアー。フランス文学者が大友を美術誌に載せた。"],
+   [3,"AERA特集 2013／『BRUTUS』合本","美術家・漫画家の証言を集めた二冊。生態系の証言集として使える。"]
+ ]}
+];
+
+const grid = document.getElementById('grid');
+ECO.forEach(E=>{
+  const sec = document.createElement('section'); sec.className='eco'; sec.style.setProperty('--ec','var(--'+E.k+')');
+  let html = '<h2>'+E.name+'</h2><p class="sub">'+E.sub+'</p><div class="eras3">';
+  [0,1,2,3].forEach(e=>{
+    const ns = E.nodes.filter(n=>n[0]===e);
+    if(!ns.length) return;
+    html += '<div class="cell" data-e="'+e+'"><h3>'+ERA[e]+'</h3><div class="chips">';
+    ns.forEach(n=>{ const idx = E.nodes.indexOf(n); html += '<button class="node'+(n[3]?' broker':'')+'" data-i="'+idx+'">'+n[1]+'</button>'; });
+    html += '</div></div>';
+  });
+  html += '</div><div class="detail"></div>';
+  sec.innerHTML = html; grid.appendChild(sec);
+  sec.addEventListener('click', e=>{
+    const b = e.target.closest('.node'); if(!b) return;
+    const n = E.nodes[+b.dataset.i]; const d = sec.querySelector('.detail');
+    const was = b.classList.contains('on');
+    sec.querySelectorAll('.node').forEach(x=>x.classList.remove('on'));
+    if(was){ d.classList.remove('show'); return; }
+    b.classList.add('on');
+    d.innerHTML = '<b>'+n[1]+(n[3]?'<span class="bk">結節点</span>':'')+'</b>'+n[2];
+    d.classList.add('show');
+  });
+});
+document.querySelectorAll('.era').forEach(btn=>btn.addEventListener('click', ()=>{
+  document.querySelectorAll('.era').forEach(x=>x.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true'); const e = btn.dataset.e;
+  document.querySelectorAll('.cell').forEach(c=>c.classList.toggle('hide', e!=='' && c.dataset.e!==e));
+}));
+</script>
+</body>
+</html>

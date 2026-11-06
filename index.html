@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>漫画の立体批評地図 — 大友克洋を軸に</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ECEAE4; --paper:#F6F4EE; --ink:#17191B; --ink2:#4F5256; --ink3:#878A8C; --rule:#CFCBC2;
+  --spine:#B5121B; --spine-soft:#F6DDDE;
+  --up:#2F6F8F; --up-soft:#DCE8EF; --down:#2E7D5B; --down-soft:#DDEAE2; --pos:#8A6D2E; --pos-soft:#EDE8D8; --ax:#6B5B95; --ax-soft:#E6E1F0;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#1A1B1D; --paper:#232527; --ink:#E7E4DC; --ink2:#B3B0A8; --ink3:#7F827F; --rule:#3B3E41;
+  --spine:#EB4A52; --spine-soft:#3A1F22;
+  --up:#7FB3DA; --up-soft:#223844; --down:#7CC9A3; --down-soft:#223A2D; --pos:#D6B36A; --pos-soft:#3A3524; --ax:#B0A4D6; --ax-soft:#2F2A40; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#1A1B1D; --paper:#232527; --ink:#E7E4DC; --ink2:#B3B0A8; --ink3:#7F827F; --rule:#3B3E41;
+  --spine:#EB4A52; --spine-soft:#3A1F22;
+  --up:#7FB3DA; --up-soft:#223844; --down:#7CC9A3; --down-soft:#223A2D; --pos:#D6B36A; --pos-soft:#3A3524; --ax:#B0A4D6; --ax-soft:#2F2A40; color-scheme:dark;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 18px 90px}
+header{padding:54px 0 26px;border-bottom:1px solid var(--rule)}
+h1,h2,h3,h4{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:700;margin:0}
+.kicker{font-family:"Shippori Mincho B1",serif;font-size:13px;letter-spacing:.14em;color:var(--ink3);margin-bottom:8px}
+h1{font-size:30px;line-height:1.3}
+h1 small{display:block;font-size:14px;font-weight:500;color:var(--spine);letter-spacing:.1em;margin-top:6px}
+.lead{color:var(--ink2);margin:14px 0 0;max-width:36em}
+.nav{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0}
+.nav a{font-size:12.5px;color:var(--ink2);border:1px solid var(--rule);border-radius:999px;padding:4px 11px;text-decoration:none;background:var(--paper)}
+.nav a:hover{border-color:var(--ink)}
+section.part{padding:30px 0 6px}
+.ph{display:grid;grid-template-columns:2.4em 1fr;gap:10px;align-items:start;margin-bottom:10px}
+.ph b{font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:24px;line-height:1.1;color:var(--pc)}
+.ph h2{font-size:19px;line-height:1.35}
+.ph p{margin:4px 0 0;color:var(--ink2);font-size:14px;line-height:1.7}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin:10px 0;border-left:3px solid var(--pc)}
+.card h3{font-size:15.5px;line-height:1.45}
+.card h3 em{font-style:normal;font-family:"Zen Kaku Gothic New",sans-serif;font-weight:400;font-size:12px;color:var(--pc);letter-spacing:.06em;margin-left:8px}
+.card p{margin:5px 0 0;font-size:14px;line-height:1.75;color:var(--ink2)}
+.card p strong{color:var(--ink);font-weight:500}
+details{background:var(--paper);border:1px solid var(--rule);border-radius:12px;margin:10px 0;border-left:3px solid var(--pc)}
+summary{cursor:pointer;padding:11px 14px;font-weight:500;font-size:15px;line-height:1.5;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";color:var(--pc);font-family:"Shippori Mincho B1",serif;flex:none}
+details[open] summary::after{content:"－"}
+summary em{font-style:normal;font-weight:400;font-size:12px;color:var(--pc);letter-spacing:.06em}
+.body{padding:0 14px 12px;font-size:14px;line-height:1.75;color:var(--ink2);border-top:1px solid var(--rule)}
+.body p{margin:10px 0 0}
+.body p strong{color:var(--ink);font-weight:500}
+.body ul{margin:8px 0 0;padding-left:1.2em}
+.body li{margin:3px 0}
+.spine{border:2px solid var(--spine);background:var(--spine-soft);border-radius:12px;padding:12px 14px;margin:10px 0}
+.spine h3{color:var(--spine);font-size:16px}
+.spine p{margin:5px 0 0;font-size:14px;line-height:1.75;color:var(--ink)}
+.flow{display:grid;grid-template-columns:1fr;gap:0}
+.arrow{text-align:center;color:var(--ink3);font-size:22px;line-height:1;padding:4px 0}
+.grid2{display:grid;grid-template-columns:1fr;gap:8px}
+.axis{background:var(--ax-soft);border-radius:10px;padding:10px 12px}
+.axis h4{font-size:14px;color:var(--ax);margin-bottom:3px}
+.axis p{margin:0;font-size:13.5px;line-height:1.7;color:var(--ink2)}
+.axis p strong{color:var(--ink);font-weight:500}
+.pos{border:1.5px dashed var(--pos);border-radius:12px;padding:12px 14px;margin:10px 0;background:var(--pos-soft)}
+.pos h3{color:var(--pos);font-size:16px}
+.pos p{margin:6px 0 0;font-size:14px;line-height:1.75;color:var(--ink)}
+.pos p strong{font-weight:500}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0 0}
+.tbl th,.tbl td{border-top:1px solid var(--rule);padding:7px 6px;vertical-align:top;text-align:left;line-height:1.5}
+.tbl th{font-weight:500;color:var(--ink3);font-size:12px;letter-spacing:.06em}
+.tbl td:first-child{font-weight:500;color:var(--ink);white-space:nowrap}
+.tblwrap{overflow-x:auto}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--rule);font-size:12px;color:var(--ink3);line-height:1.7}
+@media (min-width:640px){ h1{font-size:38px} .grid2{grid-template-columns:1fr 1fr} .wrap{padding:0 28px 100px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">地層／STRATA　統合地図</div>
+  <h1>漫画の立体批評地図<small>大友克洋を軸に、グローバル・ファインアートの中の位置を定める</small></h1>
+  <p class="lead">一枚で読めるように、上流（大友を生んだ歴史と生態系）→ 作品群 → 下流（大友が与えたもの）を一本の流れに置き、その上に「漫画を立体的に批評するための五つの軸」と「ファインアートに漫画が入る五つの入口」を重ねました。詳細は三枚の下位地図に分けています。</p>
+  <div class="nav">
+    <a href="timeline-3axis.html">年表（3軸）</a>
+    <a href="contemporary-history.html">同時代史（映画／SF／テクノロジー／社会）</a>
+    <a href="strata-map.html">概念地図（地層の断面）</a>
+    <a href="ecosystem.html">生態系図</a>
+  </div>
+</header>
+
+<section class="part" style="--pc:var(--pos)">
+  <div class="ph"><b>〇</b><div><h2>問い：漫画はファインアートにどこから入ったか</h2><p>これまでの入口は四つ。どれも漫画を「作品」として扱いきれていない。大友を軸に置く理由は、四つの入口すべてで大友が例外になるからで、その例外を第五の入口にする。</p></div></div>
+
+  <details><summary>入口Ａ　ポップ／表面 <em>スーパーフラット型</em></summary><div class="body">
+    <p><strong>何か。</strong>村上隆「スーパーフラット」（2000）、「リトルボーイ」展（2005）。浮世絵から漫画・アニメまでを平面性の系譜として束ね、戦後日本の幼児性と結びつけた。市場では村上・奈良が漫画的図像を美術に換金した。</p>
+    <p><strong>限界。</strong>漫画は図像の供給源として扱われ、漫画家は消える。密度と時間を扱えない。大友の均質空間は「平面」ではなく「層」なので、この入口では説明できない。</p>
+  </div></details>
+
+  <details><summary>入口Ｂ　作者／第九芸術 <em>BD型</em></summary><div class="body">
+    <p><strong>何か。</strong>アングレーム国際漫画祭、カルティエ財団のメビウス展「Moebius-Transe-Forme」（2010–11）、ポンピドゥー「Bande dessinée 1964-2024」（2024、学術顧問ティエリー・グルンステン）。起点を1964年＝『ガロ』創刊に置き、欧州・日本・米国の三系統を並べた。漫画家を作者（auteur）として回顧する型。日本ではGENGA展（2012）と諸星大二郎展（2020–21）がこの型。</p>
+    <p><strong>限界。</strong>原画が動かないと成立しない。ポンピドゥーは『AKIRA』の原画を展示できず、アニメの一場面を上映した。作者モデルは漫画の集団制作・産業性を切り落とす。</p>
+  </div></details>
+
+  <details><summary>入口Ｃ　視覚文化／人類学 <em>資料型</em></summary><div class="body">
+    <p><strong>何か。</strong>大英博物館「マンガ」展（2019）、国立新美術館「ニッポンのマンガ・アニメ・ゲーム」展（2015）、森美術館「MAMリサーチ011：東京アンダーグラウンド」（2025、エフェメラ中心）。漫画を現象・資料・運動として展示する。</p>
+    <p><strong>限界。</strong>作品の価値判断を保留する。「線」を批評しない。社会史にはなるが美術史にならない。</p>
+  </div></details>
+
+  <details><summary>入口Ｄ　データベース／おたく理論 <em>批評型</em></summary><div class="body">
+    <p><strong>何か。</strong>東浩紀『動物化するポストモダン』（2001）、伊藤剛『テヅカ・イズ・デッド』（2005）、ラマール『The Anime Machine』（2009）。作品ではなく消費構造・キャラ・装置を論じ、海外の日本研究と接続した。</p>
+    <p><strong>限界。</strong>物語と作者を解体する方向なので、大友のような「世界を構築する作者」を扱いにくい。ただしラマールの「奥行きは密度に置き換わる」は第五の入口に転用できる。</p>
+  </div></details>
+
+  <div class="pos">
+    <h3>入口Ｅ　地層：堆積する世界制作としての線（提案）</h3>
+    <p>漫画を「図像」でも「作者の原画」でも「資料」でもなく、<strong>線の密度によって時間の厚みを持つ世界を構築する実践</strong>として美術に置く。比較対象は漫画家ではなく、ウィリアム・ケントリッジ（ドローイングとアニメーションで都市と歴史を描く）、アンゼルム・キーファー（地層と歴史）、ジュリー・メレツ（都市の積層）、孫遜（水墨アニメーションと中国史）、そしてメビウス。理論の足場はラマール（多層画像・密度）、グルンステン（漫画のシステム）、人新世と深い時間。</p>
+    <p><strong>なぜ大友か。</strong>Ａでは例外（平面でなく層）、Ｂでは例外（原画が出ない作者）、Ｃでは例外（資料にしては線が強すぎる）、Ｄでは例外（データベースでなく世界）。四つの入口がすべて取りこぼす作家だから、第五の入口の軸になる。</p>
+  </div>
+</section>
+
+<section class="part" style="--pc:var(--ax)">
+  <div class="ph"><b>一</b><div><h2>漫画を立体的に批評する五つの軸</h2><p>平面の批評（絵柄・物語）を立体にするための座標。大友はそれぞれの軸でどこにいるか。</p></div></div>
+  <div class="grid2">
+    <div class="axis"><h4>線（技法の系譜）</h4><p>絵巻→手塚→劇画→ちばのテンポ→村野の現場→メビウス→大友→以後。<strong>大友：</strong>人物も背景も同じ質感の「もの」として描く均質空間。写実の出所は劇画ではなく、本人の言葉では村野・ちば・メビウス・ディズニー。</p></div>
+    <div class="axis"><h4>空間（密度と層）</h4><p>スーパーフラットは層を一枚に圧縮する。地層は層を重ねたまま時間を堆積させる。<strong>大友：</strong>描き込みは奥行きではなく密度で、密度が時間を含むとき地層になる（ラマールの定式を転用）。</p></div>
+    <div class="axis"><h4>時間（歴史の堆積）</h4><p>1923震災→1945戦災→1964五輪→1995→2011→2021五輪。<strong>大友：</strong>ネオ東京の瓦礫は東京の地層。『童夢』の団地、『AKIRA』の2020年五輪は、現実の都市史と二重写しになり続けている。</p></div>
+    <div class="axis"><h4>制度（誰が価値を決めたか）</h4><p>版元→産業→海外→国内制度→美術館。<strong>大友：</strong>双葉社・講談社／製作委員会／Epic・Glénat・アングレーム／紫綬褒章・全集。日本の公立美術館だけが空いている。</p></div>
+    <div class="axis"><h4>作者性（個人と集団）</h4><p>美術の作者モデルは個人の手を前提にするが、漫画は編集者・アシスタント・製作委員会の集団制作でもある。<strong>大友：</strong>漫画では一人で描く人、映像では70人の作画を束ねる人。この二重性を隠さず批評の対象にする。ケントリッジ（単独）との差はここ。</p></div>
+    <div class="axis"><h4>物質（何が作品か）</h4><p>原画か、印刷物か、絵コンテか、上映か。<strong>大友：</strong>原画は動かない。だが絵コンテ、レイアウト、印刷ゲラ、仮囲いのコラージュ、上映が「作品」になりうる。ポンピドゥーがアニメを上映した判断は、弱点ではなく方法として引き取る。</p></div>
+  </div>
+</section>
+
+<section class="part" style="--pc:var(--up)">
+  <div class="ph"><b>二</b><div><h2>上流：大友を生んだ歴史と生態系</h2><p>三つの文化史と六つの生態系。詳細は年表と生態系図に。ここでは「何が大友を可能にしたか」だけを一行ずつ。</p></div></div>
+  <details open><summary>歴史：三つの軸 <em>年表へ</em></summary><div class="body">
+    <p><strong>Ａ 都市。</strong>震災と戦災で二度焼けた東京、丹下の東京計画、団地、五輪、磯崎新が描いた未来の廃墟。壊れては建つ都市の反復が、描く対象として用意されていた。</p>
+    <p><strong>Ｂ 線。</strong>手塚の記号、劇画の写実、ちばのテンポ、村野の現場、メビウスの密度、ディズニーの観察、スタジオぬえとシド・ミードのメカ。線の系譜が1970年代の東京に集まっていた。</p>
+    <p><strong>Ｃ 地下。</strong>柳田・折口の民俗学、乱歩・夢野・横溝の猟奇、半村良の伝奇SF、今村昌平とATG、超能力ブーム、アングラ（1966–72）、岩波ホール。本人の本棚と映画館の記憶で、SFの下に敷かれた層。</p>
+  </div></details>
+  <details><summary>生態系：六つの圏 <em>生態系図へ</em></summary><div class="body">
+    <ul>
+      <li><strong>版元・媒体：</strong>双葉社『漫画アクション』→講談社『ヤングマガジン』→全集。漫画家としての身分。</li>
+      <li><strong>アニメ産業：</strong>角川春樹事務所→りんたろう・マッドハウス→AKIRA製作委員会→サンライズ→OVAL GEAR。映像作家としての身分。</li>
+      <li><strong>場：</strong>仙台の映画館、吉祥寺、名画座、ATG、岩波ホール、3331、渋谷PARCOの仮囲い。</li>
+      <li><strong>協働者：</strong>矢作俊彦、ニューウェーブ、メビウス、森本晃司、芸能山城組、河村康輔、浦沢直樹。</li>
+      <li><strong>海外・制度：</strong>日本SF大賞→Epic→Glénat→アイズナー→仏勲章→紫綬褒章→アングレーム。</li>
+      <li><strong>批評：</strong>村上知彦→夏目房之介→大塚英志→ササキバラ→伊藤剛→ラマール→中条省平。</li>
+    </ul>
+    <p>大友は自分から営業しない。生態系は常に「誰かが大友を別の場所へ運んだ」形で広がった。結節点は角川春樹、りんたろう、メビウス、オリフ、河村康輔、浦沢直樹。</p>
+  </div></details>
+</section>
+
+<section class="part" style="--pc:var(--spine)">
+  <div class="ph"><b>三</b><div><h2>作品群：何が生まれたか</h2><p>上流が収束し、下流が発散する蝶番。五つの時期に分け、各時期が「何を発明したか」を一行で。</p></div></div>
+  <div class="spine"><h3>短編期 1973–79　『銃声』『ショート・ピース』『ハイウェイスター』『さよならにっぽん』『Fire-ball』</h3><p>発明：日本人の顔と生活感のある部屋。ニューシネマの乾いた若者。メビウスが衝撃を受けたのはこの時期。</p></div>
+  <div class="spine"><h3>童夢 1980–81</h3><p>発明：背景が主役になる漫画。団地という戦後空間の化石化。漫画初の日本SF大賞。浦沢が『AKIRA』以上に衝撃だったと語る。</p></div>
+  <div class="spine"><h3>AKIRA 1982–90　／　映画 1988</h3><p>発明：都市のスケールで破壊と再生を描く均質空間。製作委員会方式の映画化。Epic版の彩色で海外へ。芸能山城組の音。「大友以後」という言葉が生まれた。</p></div>
+  <div class="spine"><h3>映像期 1983–2013　『幻魔大戦』『迷宮物語』『老人Z』『MEMORIES』『スチームボーイ』『蟲師』『SHORT PEACE』</h3><p>発明：漫画家が映像作家になる経路。『大砲の街』のワンカット、『スチームボーイ』の技術史、『火要鎮』の絵巻。</p></div>
+  <div class="spine"><h3>アーカイブ期 2012–26　GENGA展、全集、セル画展、漫勉neo、OVAL GEAR</h3><p>発明：自分の仕事を資料化する段階。原画・絵コンテ・セル画が「見られる対象」になり、美術館の手前まで来た。</p></div>
+</section>
+
+<section class="part" style="--pc:var(--down)">
+  <div class="ph"><b>四</b><div><h2>下流：大友が与えたもの</h2><p>六つの方向。「影響を公言した」ものと「批評上の比較」を分けて記す。</p></div></div>
+  <details><summary>漫画 <em>線の継承</em></summary><div class="body"><p>鳥山明（公言）、士郎正宗、貞本義行『エヴァ』、井上雄彦（対談）、浦沢直樹（公言）、寺田克也、駕籠真太郎。少年誌の写実化、情報SFの密度、90年代の破壊と再生の構図。</p></div></details>
+  <details><summary>アニメ・映画 <em>ジャパニメーションの回路</em></summary><div class="body"><p>『攻殻機動隊』（1995）→『マトリックス』（1999、公言）。『クロニクル』（2012、公言）、『イノセンツ』（2021、『童夢』から公言）。並走として塚本晋也『鉄男』。海外で「アニメ＝大人の映画」という認識を作ったのは1988年の映画版。</p></div></details>
+  <details><summary>音楽・都市・ファッション <em>図像の流通</em></summary><div class="body"><p>カニエ・ウェスト「Stronger」MV（2007）、Supreme×AKIRA（2017）、渋谷PARCOのAKIRA ART WALL（2017–19、河村康輔）。漫画の図像が都市の表面に流通した。これは入口Ａ（表面）の現象であり、大友本人は距離を置いている。</p></div></details>
+  <details><summary>現代美術 <em>最も薄い方向</em></summary><div class="body"><p>会田誠、山本直樹（AERA 2013で公言）。河村康輔のコラージュ。それ以外に、大友を直接の参照として作品化した美術家はほとんどいない。この薄さが『地層』の余白で、応答作品の枠（池田学、山口晃、鴻池朋子、大竹伸朗、風間サチコ、CON_の作家）はここに置く。</p></div></details>
+  <details><summary>理論・批評 <em>言葉の生産</em></summary><div class="body"><p>「大友以後」（批評の造語）、夏目の記号論、ササキバラの均質空間、伊藤剛のキャラ論、大塚英志の戦後漫画史、ラマールの多層画像、中条省平のインタビュー。海外ではポンピドゥー2024の三系統比較で、大友は日本側の代表の一人として配置された。</p></div></details>
+  <details><summary>制度 <em>漫画が美術館に近づいた経路</em></summary><div class="body"><p>アングレームの最優秀賞と特集展、大英博物館、ポンピドゥー。大友個人の回顧展は日本の公立美術館で未開催。海外の制度が先に動き、国内の美術館だけが残っている。</p></div></details>
+</section>
+
+<section class="part" style="--pc:var(--pos)">
+  <div class="ph"><b>五</b><div><h2>ポジションの取り方</h2><p>グローバル・ファインアートの中で、大友を軸にした漫画の位置を、何を主張し、何を主張しないかで決める。</p></div></div>
+  <div class="tblwrap"><table class="tbl">
+    <tr><th>主張する</th><th>根拠</th><th>主張しない</th></tr>
+    <tr><td>線は世界を構築する</td><td>均質空間、密度→時間（ラマール転用）、ケントリッジとの比較</td><td>漫画＝ポップ図像</td></tr>
+    <tr><td>漫画は都市史の一部</td><td>1964／2020五輪、団地、PARCOの仮囲い、人新世1953</td><td>SF漫画の予言</td></tr>
+    <tr><td>原画がなくても作品は立つ</td><td>絵コンテ、レイアウト、印刷ゲラ、上映、セル画。ポンピドゥーの判断</td><td>原画至上主義</td></tr>
+    <tr><td>作者性の二重性を見せる</td><td>一人で描く漫画と、70人で動かす映像。製作委員会</td><td>孤高の作家神話</td></tr>
+    <tr><td>地下から掘る</td><td>岡本太郎の縄文→梅原・網野→中沢。アングラ1966–72。諸星・宮崎の民俗学</td><td>スーパーフラットの否定</td></tr>
+    <tr><td>補集合として置く</td><td>スーパーフラットの25年後。圧縮に対する堆積</td><td>村上隆への対抗</td></tr>
+  </table></div>
+  <div class="pos">
+    <h3>一文で言うと</h3>
+    <p>大友克洋は、日本の漫画がファインアートに入るための第五の入口である。ポップでも作者でも資料でもデータベースでもなく、線の密度で時間を堆積させる「地層」として。その入口は、宮崎駿と諸星大二郎を同じ層に置くことで通路になり、現代美術の応答作品によって美術館に接続される。</p>
+  </div>
+  <div class="card"><h3>限界と正直に書くこと<em>要確認</em></h3>
+    <p>原画が出ない以上、「作者の回顧展」の型は取れない。製作委員会と集団制作を美術の作者モデルに押し込むと嘘になる。宮崎と諸星の直接の関係（コダマと『マッドメン』）は一次発言が未確認。AKIRA製作委員会の構成、各作品の製作費は当時の公表資料の記憶で、一次確認が要る。ケントリッジ・キーファー・メレツとの比較は批評上の提案であり、本人同士の接点はない。</p>
+  </div>
+</section>
+
+<p class="foot">本人の明言は『BRUTUS』合本、『芸術新潮』2012、BDfile 2013、MANTANWEB 2018、CINRA 2019、『Akira club』から。ポンピドゥー2024の構成と『AKIRA』原画不在は展評・来場記録に基づく。海外美術館の動向は2024–25年時点。</p>
+</div>
+</body>
+</html>
